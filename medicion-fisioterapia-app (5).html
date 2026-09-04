@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medición e Instrumentos en Ciencias de la Salud — LCM UPC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E9EDEA;
+    --paper-2:#DEE4DF;
+    --ink:#132A2C;
+    --ink-soft:#3C5254;
+    --line:#B9C4BE;
+    --teal:#2F6F63;
+    --teal-dark:#1E4A42;
+    --gold:#C08829;
+    --rust:#9C4630;
+    --white:#F7F9F6;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --disp: 'Space Grotesk', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans);
+    line-height:1.55;
+    background-image:
+      linear-gradient(var(--paper-2) 1px, transparent 1px);
+    background-size: 100% 32px;
+  }
+  a{color:var(--teal-dark);}
+  .ruler{
+    height:14px; width:100%;
+    background-image: repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 8px);
+    opacity:0.35;
+  }
+  .ruler.thin{height:8px; opacity:0.22;}
+  header.hero{
+    background:var(--ink); color:var(--white); padding:0 0 28px 0; position:relative; overflow:hidden;
+  }
+  .hero-inner{max-width:980px; margin:0 auto; padding: 40px 24px 8px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:#9FC9BE; display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:"▸"; color:var(--gold);}
+  h1{
+    font-family:var(--disp); font-weight:700; font-size:clamp(28px,5vw,46px);
+    margin:0 0 10px 0; letter-spacing:-0.01em; line-height:1.05;
+  }
+  .hero-sub{color:#C7D6D0; font-size:16px; max-width:640px; margin:0 0 22px;}
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:18px; font-family:var(--mono); font-size:12.5px; color:#8FB3AA;
+    padding-top:16px; border-top:1px solid #2A4643;
+  }
+  .hero-meta span b{color:#E7EFEC; font-weight:600;}
+
+  nav.tabs{
+    position:sticky; top:0; z-index:50; background:var(--paper);
+    border-bottom:2px solid var(--ink);
+    display:flex; overflow-x:auto; max-width:980px; margin:0 auto;
+  }
+  nav.tabs button{
+    font-family:var(--disp); font-weight:600; font-size:14.5px; color:var(--ink-soft);
+    background:none; border:none; padding:14px 18px; cursor:pointer; white-space:nowrap;
+    border-bottom:3px solid transparent; transition:.15s;
+  }
+  nav.tabs button:hover{color:var(--ink);}
+  nav.tabs button.active{color:var(--teal-dark); border-bottom-color:var(--gold);}
+
+  main{max-width:980px; margin:0 auto; padding:30px 24px 90px;}
+  section.view{display:none;}
+  section.view.active{display:block; animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:translateY(0)}}
+
+  .module{
+    background:var(--white); border:1px solid var(--line); border-radius:2px;
+    margin-bottom:16px; overflow:hidden;
+  }
+  .module > summary{
+    list-style:none; cursor:pointer; padding:16px 20px; display:flex; align-items:baseline; gap:14px;
+    font-family:var(--disp); font-weight:600; font-size:17px; color:var(--ink);
+  }
+  .module > summary::-webkit-details-marker{display:none;}
+  .module > summary .num{font-family:var(--mono); color:var(--gold); font-size:13px; min-width:26px;}
+  .module > summary::after{content:"+"; margin-left:auto; font-size:20px; color:var(--teal); font-family:var(--mono);}
+  .module[open] > summary::after{content:"–";}
+  .module-body{padding:0 20px 20px 60px; font-size:15px; color:var(--ink-soft);}
+  .module-body h4{font-family:var(--disp); color:var(--ink); font-size:14.5px; margin:16px 0 6px; text-transform:uppercase; letter-spacing:.03em;}
+  .module-body p{margin:0 0 10px;}
+  .rule{
+    background:var(--teal-dark); color:#EAF3F0; padding:12px 14px; border-radius:2px; font-size:14px;
+    margin:10px 0; border-left:3px solid var(--gold);
+  }
+  .signal{
+    background:#FBF3E4; border:1px dashed var(--gold); border-radius:2px; padding:10px 12px; font-size:13.5px; margin:8px 0;
+  }
+  .signal b{color:var(--rust);}
+  .formula-box{
+    background:var(--paper); border:1px solid var(--line); border-left:3px solid var(--teal);
+    border-radius:2px; padding:12px 14px; margin:14px 0 18px; font-size:13px;
+  }
+  .formula-box .ftitle{
+    font-family:var(--mono); font-size:10.5px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--teal-dark); margin-bottom:6px;
+  }
+  .formula-box code{
+    font-family:var(--mono); font-size:13.5px; color:var(--ink); display:block; margin:3px 0;
+  }
+  .formula-box p{margin:6px 0 0; font-size:12.5px; color:var(--ink-soft);}
+  table.ref{width:100%; border-collapse:collapse; margin:10px 0; font-size:13.5px;}
+  table.ref th, table.ref td{border-top:1px solid var(--line); padding:7px 8px; text-align:left;}
+  table.ref th{font-family:var(--mono); text-transform:uppercase; font-size:11px; color:var(--teal-dark); letter-spacing:.04em;}
+  table.ref tr:last-child td{border-bottom:1px solid var(--line);}
+  .calc-link{
+    font-family:var(--mono); font-size:11.5px; background:var(--teal-dark); color:#fff;
+    border:none; padding:5px 10px; border-radius:2px; cursor:pointer; white-space:nowrap;
+  }
+  .calc-link:hover{background:var(--teal);}
+  .guide-block{background:var(--white); border:2px solid var(--ink); border-radius:2px; padding:18px 20px; margin-bottom:20px;}
+  .guide-block h3{font-family:var(--disp); font-size:17px; margin:14px 0 6px; color:var(--teal-dark);}
+  .guide-block h3:first-of-type{margin-top:0;}
+
+  .qcard{border:1px solid var(--line); background:var(--white); padding:14px 16px; margin:10px 0; border-radius:2px;}
+  .qcard p.q{font-weight:600; margin:0 0 8px;}
+  .qcard .opts button{
+    display:block; width:100%; text-align:left; background:var(--paper); border:1px solid var(--line);
+    padding:8px 10px; margin-bottom:6px; border-radius:2px; cursor:pointer; font-family:var(--sans); font-size:14px;
+  }
+  .qcard .opts button.correct{background:#D8EBE3; border-color:var(--teal);}
+  .qcard .opts button.wrong{background:#F3DAD2; border-color:var(--rust);}
+  .qcard .fb{display:none; margin-top:8px; font-size:13.5px; background:var(--paper-2); padding:10px; border-radius:2px;}
+  .qcard .fb.show{display:block;}
+
+  /* calculators */
+  .calc-grid{display:grid; grid-template-columns:1fr; gap:18px;}
+  .card{background:var(--white); border:1px solid var(--line); border-radius:2px; padding:20px;}
+  .card h3{font-family:var(--disp); font-size:19px; margin:0 0 4px; color:var(--ink);}
+  .card .desc{font-size:13.5px; color:var(--ink-soft); margin-bottom:16px;}
+  label{display:block; font-family:var(--mono); font-size:11.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--teal-dark); margin:12px 0 5px;}
+  input[type=number], input[type=text], textarea, select{
+    width:100%; font-family:var(--mono); font-size:14px; padding:9px 10px; border:1px solid var(--line);
+    border-radius:2px; background:var(--paper); color:var(--ink);
+  }
+  textarea{min-height:90px; resize:vertical;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px;}
+  @media (max-width:600px){.row,.row3{grid-template-columns:1fr;}}
+  button.run{
+    margin-top:16px; background:var(--teal-dark); color:#fff; border:none; padding:11px 20px;
+    font-family:var(--disp); font-weight:600; font-size:14.5px; border-radius:2px; cursor:pointer;
+  }
+  button.run:hover{background:var(--teal);}
+  button.ghost{
+    margin-top:16px; margin-left:8px; background:none; color:var(--ink-soft); border:1px solid var(--line);
+    padding:10px 16px; font-family:var(--sans); font-size:13.5px; border-radius:2px; cursor:pointer;
+  }
+  .result{
+    margin-top:18px; padding:16px; border-radius:2px; background:var(--ink); color:var(--white); display:none;
+  }
+  .result.show{display:block;}
+  .result .big{font-family:var(--mono); font-size:30px; font-weight:600; color:#EAF3F0;}
+  .result .label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:#8FB3AA;}
+  .result .interp{margin-top:10px; font-size:14px; color:#D6E3DE; border-top:1px solid #2A4643; padding-top:10px;}
+  .tag{display:inline-block; font-family:var(--mono); font-size:11px; padding:3px 8px; border-radius:20px; margin-right:6px;}
+  .tag.excelente{background:#2F6F63; color:#fff;}
+  .tag.buena{background:#5D9E8D; color:#0e2320;}
+  .tag.moderada{background:var(--gold); color:#3a2600;}
+  .tag.pobre{background:var(--rust); color:#fff;}
+  .hint{font-size:12px; color:var(--ink-soft); margin-top:6px;}
+  .table-input{width:100%; border-collapse:collapse; margin-top:8px;}
+  .table-input td{padding:2px;}
+  .table-input input{padding:6px 8px; font-size:13px;}
+  .mini-btn{
+    font-family:var(--mono); font-size:12px; background:var(--paper); border:1px solid var(--line);
+    padding:5px 10px; border-radius:2px; cursor:pointer; margin-right:6px; margin-top:8px;
+  }
+  footer{max-width:980px; margin:0 auto; padding:20px 24px 60px; font-family:var(--mono); font-size:12px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Taller de Herramientas de Investigación en Salud</div>
+    <h1>Medición e instrumentos<br>en ciencias de la salud</h1>
+    <p class="hero-sub">Guía de estudio interactiva y calculadoras clínicas para validez, confiabilidad, error de medida, efectos techo/suelo, sensibilidad al cambio y correlación — con tus propios datos de dinamómetro, goniómetro u otro instrumento.</p>
+    <div class="hero-meta">
+      <span>Prep. examen parcial · <b>2025-20</b></span>
+      <span>Universidad Peruana de Ciencias Aplicadas · <b>UPC</b></span>
+      <span>Laboratorio de Ciencias del Movimiento · <b>LCM</b></span>
+    </div>
+  </div>
+  <div class="ruler"></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-view="teoria" class="active">Teoría</button>
+  <button data-view="calc-icc">ICC</button>
+  <button data-view="calc-testretest">Test-retest</button>
+  <button data-view="calc-semmdc">SEM / MDC</button>
+  <button data-view="calc-cambio">¿Cambio real?</button>
+  <button data-view="calc-r">Correlación r</button>
+  <button data-view="calc-alfa">Alfa de Cronbach</button>
+  <button data-view="calc-techosuelo">Techo / Suelo</button>
+  <button data-view="calc-validez">Tipo de validez</button>
+  <button data-view="calc-concurrente">Validez concurrente</button>
+  <button data-view="calc-sensesp">Sens / Esp</button>
+  <button data-view="calc-roc">ROC / AUC</button>
+  <button data-view="practica">Práctica</button>
+</nav>
+
+<main>
+
+<!-- ================= TEORÍA ================= -->
+<section class="view active" id="teoria">
+
+  <div class="guide-block">
+    <div class="eyebrow" style="color:var(--teal-dark); margin-bottom:6px;">Empieza aquí</div>
+    <h1 style="font-size:22px; margin-bottom:4px;">¿Qué calculadora uso según el tipo?</h1>
+    <p style="color:var(--ink-soft); font-size:14px; margin-top:0;">No hay una sola "calculadora de validez" o "de confiabilidad" — cada subtipo se cuantifica con una herramienta estadística distinta. Usa esta guía para ir directo a la correcta.</p>
+
+    <h3>Validez — según su tipo</h3>
+    <table class="ref">
+      <tr><th>Tipo de validez</th><th>¿Cómo se cuantifica?</th><th></th></tr>
+      <tr><td>Aparente / Contenido</td><td>Juicio cualitativo (pacientes o expertos) — no se calcula con estadística; se documenta con un panel de expertos.</td><td></td></tr>
+      <tr><td>Constructo</td><td>Correlación con variables teóricamente relacionadas (r de Pearson)</td><td><button class="calc-link" onclick="goToView('calc-r')">Ir a Correlación r →</button></td></tr>
+      <tr><td>Concurrente (variable continua)</td><td>r de Pearson + ICC de acuerdo absoluto + Bland-Altman contra el gold standard</td><td><button class="calc-link" onclick="goToView('calc-concurrente')">Ir a Validez concurrente →</button></td></tr>
+      <tr><td>Concurrente / Predictiva (criterio binario: enfermo/sano, cae/no cae)</td><td>Sensibilidad, especificidad, VPP/VPN, LR — o curva ROC/AUC si el punto de corte no está definido</td><td><button class="calc-link" onclick="goToView('calc-sensesp')">Ir a Sens/Esp →</button> <button class="calc-link" onclick="goToView('calc-roc')">ROC/AUC →</button></td></tr>
+      <tr><td>Predictiva (resultado futuro continuo)</td><td>Correlación r (o regresión) entre la medición basal y el resultado futuro</td><td><button class="calc-link" onclick="goToView('calc-r')">Ir a Correlación r →</button></td></tr>
+    </table>
+
+    <h3>Confiabilidad — según su tipo</h3>
+    <table class="ref">
+      <tr><th>Tipo de confiabilidad</th><th>¿Cómo se cuantifica?</th><th></th></tr>
+      <tr><td>Inter-evaluador (2 o más evaluadores independientes)</td><td>ICC(2,1) o ICC(3,1) con la tabla sujeto × evaluador</td><td><button class="calc-link" onclick="goToView('calc-icc')">Ir a ICC →</button></td></tr>
+      <tr><td>Intra-evaluador (mismo evaluador, misma sesión, repeticiones)</td><td>ICC(3,1) con la tabla sujeto × intento</td><td><button class="calc-link" onclick="goToView('calc-icc')">Ir a ICC →</button></td></tr>
+      <tr><td>Test-retest (mismo evaluador, dos momentos distintos)</td><td>ICC + sesgo y límites de acuerdo (Bland-Altman) + SEM/MDC en un solo panel</td><td><button class="calc-link" onclick="goToView('calc-testretest')">Ir a Test-retest →</button></td></tr>
+      <tr><td>Consistencia interna (ítems de una escala)</td><td>Alfa de Cronbach con la matriz sujeto × ítem</td><td><button class="calc-link" onclick="goToView('calc-alfa')">Ir a Alfa de Cronbach →</button></td></tr>
+    </table>
+
+    <h3>Otras propiedades de medición</h3>
+    <table class="ref">
+      <tr><th>Propiedad</th><th>¿Cómo se cuantifica?</th><th></th></tr>
+      <tr><td>Error de medida</td><td>SEM y MDC a partir de la SD y el ICC</td><td><button class="calc-link" onclick="goToView('calc-semmdc')">Ir a SEM/MDC →</button></td></tr>
+      <tr><td>¿Un cambio clínico es real?</td><td>Comparar el cambio observado contra el MDC del instrumento</td><td><button class="calc-link" onclick="goToView('calc-cambio')">Ir a ¿Cambio real? →</button></td></tr>
+      <tr><td>Efecto techo / suelo</td><td>% de la muestra en la puntuación mínima o máxima posible</td><td><button class="calc-link" onclick="goToView('calc-techosuelo')">Ir a Techo/Suelo →</button></td></tr>
+    </table>
+  </div>
+
+  <details class="module" open>
+    <summary><span class="num">01</span> Validez</summary>
+    <div class="module-body">
+      <p>La <b>validez</b> es el grado en que un instrumento mide realmente lo que pretende medir. No es una propiedad del instrumento en sí, sino de sus puntuaciones en relación con un propósito específico.</p>
+      <div class="rule">Regla de oro: un instrumento puede ser <b>confiable sin ser válido</b>, pero nunca puede ser válido sin ser confiable.</div>
+      <h4>Tipos de validez</h4>
+      <table class="ref">
+        <tr><th>Tipo</th><th>¿Quién juzga?</th><th>¿Cuándo?</th><th>Palabra clave</th></tr>
+        <tr><td>Aparente (facie)</td><td>Pacientes / usuarios</td><td>Al ver el instrumento</td><td>"parece medir", "refleja mis preocupaciones"</td></tr>
+        <tr><td>Contenido</td><td>Expertos</td><td>Al diseñar el instrumento</td><td>"cubrir todos los dominios"</td></tr>
+        <tr><td>Constructo</td><td>Investigadores (teoría)</td><td>Comparando con teoría</td><td>"hipótesis", "correlación esperada"</td></tr>
+        <tr><td>Concurrente</td><td>Investigadores</td><td>Simultáneamente</td><td>"gold standard", "mismo instante"</td></tr>
+        <tr><td>Predictiva</td><td>Investigadores</td><td>Resultado futuro</td><td>"predecir", "en los próximos meses"</td></tr>
+      </table>
+      <div class="signal"><b>Ejemplo concurrente:</b> un dispositivo portátil para medir altura de salto se compara con una plataforma de fuerza en el mismo instante → validez CONCURRENTE.</div>
+      <div class="signal"><b>Ejemplo predictiva:</b> la fuerza de agarre al alta hospitalaria se usa para estimar el riesgo de reingreso en los siguientes 3 meses → validez PREDICTIVA.</div>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">02</span> Confiabilidad</summary>
+    <div class="module-body">
+      <p>La <b>confiabilidad</b> es la consistencia o reproducibilidad de las mediciones. Un instrumento confiable produce resultados similares cuando se aplica en condiciones equivalentes.</p>
+      <h4>Tipos de confiabilidad</h4>
+      <table class="ref">
+        <tr><th>Tipo</th><th>¿Cuántos evaluadores?</th><th>¿Cuándo?</th></tr>
+        <tr><td>Test-retest</td><td>Uno</td><td>Dos momentos diferentes, sin intervención entre ellos</td></tr>
+        <tr><td>Inter-evaluador</td><td>Dos o más, independientes</td><td>Mismo momento / mismo paciente</td></tr>
+        <tr><td>Intra-evaluador</td><td>Uno</td><td>Repetido en la misma sesión</td></tr>
+        <tr><td>Consistencia interna</td><td>—</td><td>¿Los ítems miden el mismo constructo? (α de Cronbach)</td></tr>
+      </table>
+      <h4>Coeficiente de Correlación Intraclase (CCI / ICC)</h4>
+      <p>Es el índice estadístico más usado para evaluar confiabilidad (especialmente inter e intra-evaluador) en mediciones continuas.</p>
+      <table class="ref">
+        <tr><th>Valor CCI</th><th>Interpretación</th></tr>
+        <tr><td>&lt; 0.50</td><td><span class="tag pobre">Pobre</span></td></tr>
+        <tr><td>0.50 – 0.75</td><td><span class="tag moderada">Moderada</span></td></tr>
+        <tr><td>0.75 – 0.90</td><td><span class="tag buena">Buena</span></td></tr>
+        <tr><td>&gt; 0.90</td><td><span class="tag excelente">Excelente</span></td></tr>
+      </table>
+      <p class="hint">→ Calcula el ICC de tus propios datos en la pestaña <b>ICC</b>.</p>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">03</span> Error de medida: SEM y MDC</summary>
+    <div class="module-body">
+      <h4>Error Estándar de Medida (SEM)</h4>
+      <p>Cuantifica cuánto error aleatorio existe en las mediciones. Se expresa en las mismas unidades que la variable medida. SEM bajo = medición precisa; SEM alto = medición imprecisa.</p>
+      <h4>Cambio Mínimo Detectable (MDC)</h4>
+      <p>Es el cambio mínimo en la puntuación de un paciente que supera el error de medida con un nivel de confianza determinado (90% o 95%). Si el cambio observado supera el MDC, el cambio es real y no producto del error.</p>
+      <div class="signal"><b>Ejemplo resuelto:</b> flexión de rodilla 95° → 103° (cambio = 8°). MDC de goniometría de rodilla = 6°. Como 8° &gt; 6°, la mejora es REAL.</div>
+      <p class="hint">→ Calcula SEM y MDC en la pestaña <b>SEM / MDC</b>, y evalúa un cambio clínico en <b>¿Cambio real?</b>.</p>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">04</span> Efectos techo y suelo</summary>
+    <div class="module-body">
+      <table class="ref">
+        <tr><th>Efecto</th><th>¿Quién está afectado?</th><th>¿Por qué ocurre?</th><th>Consecuencia</th></tr>
+        <tr><td>Suelo</td><td>Pobres rendidores / alta gravedad</td><td>Instrumento demasiado difícil</td><td>No se detectan mejorías en pacientes graves</td></tr>
+        <tr><td>Techo</td><td>Buenos rendidores / alta capacidad</td><td>Instrumento demasiado fácil</td><td>No se detectan deterioros en atletas/expertos</td></tr>
+      </table>
+      <div class="signal"><b>Suelo:</b> Illinois Agility Test en pacientes con ACV agudo — la mayoría obtiene cero.</div>
+      <div class="signal"><b>Techo:</b> prueba de movilidad en bailarines profesionales — la mayoría se agrupa en el extremo superior.</div>
+      <p class="hint">→ Analiza tu propia muestra en la pestaña <b>Techo / Suelo</b>.</p>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">05</span> Sensibilidad al cambio (responsividad)</summary>
+    <div class="module-body">
+      <p>Capacidad de un instrumento para detectar cambios genuinos a lo largo del tiempo, especialmente los clínicamente relevantes.</p>
+      <div class="signal">Escala A muestra mejora de 20 puntos; Escala B solo 2 puntos, en pacientes con la misma mejoría clínica → la Escala A tiene mayor sensibilidad al cambio.</div>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">06</span> Correlación</summary>
+    <div class="module-body">
+      <p>El coeficiente de Pearson (<i>r</i>) oscila entre −1 y +1. Indica dirección y fuerza de una relación <b>lineal</b> entre dos variables.</p>
+      <table class="ref">
+        <tr><th>Valor r</th><th>Dirección</th><th>Interpretación</th></tr>
+        <tr><td>+0.80</td><td>Positiva</td><td>A más X, más Y (relación fuerte)</td></tr>
+        <tr><td>−0.80</td><td>Negativa</td><td>A más X, menos Y (relación fuerte inversa)</td></tr>
+        <tr><td>0.00</td><td>Ninguna</td><td>No existe relación lineal</td></tr>
+      </table>
+      <div class="rule">¡Trampa clásica! Una correlación alta (r = +0.80) <b>no implica causalidad</b>. "A más horas de terapia, tiende a haber mayor independencia" ✓ — "La terapia causa directamente la mejora" ✗.</div>
+      <p class="hint">→ Calcula r con tus propios pares de datos en <b>Correlación r</b>.</p>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">07</span> Relación entre confiabilidad y validez</summary>
+    <div class="module-body">
+      <div class="rule">La confiabilidad es condición <b>NECESARIA pero NO SUFICIENTE</b> para la validez.</div>
+      <p><b>Analogía de la cinta métrica estirada:</b> mide 35.5, 35.6, 35.5 cm tres veces → CONFIABLE (reproducible). Pero la cinta está estirada, así que la medida real es menor → NO es VÁLIDA. Conclusión: confiable pero no válida.</p>
+      <table class="ref">
+        <tr><th>Situación</th><th>¿Confiable?</th><th>¿Válida?</th><th>¿Posible?</th></tr>
+        <tr><td>Mide consistentemente la variable correcta</td><td>Sí</td><td>Sí</td><td>Sí — ideal</td></tr>
+        <tr><td>Mide consistentemente algo incorrecto</td><td>Sí</td><td>No</td><td>Sí — cinta estirada</td></tr>
+        <tr><td>Mide de forma inconsistente algo correcto</td><td>No</td><td>No</td><td>No puede ser válida</td></tr>
+        <tr><td>Mide de forma inconsistente algo incorrecto</td><td>No</td><td>No</td><td>Sí — el peor caso</td></tr>
+      </table>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">08</span> Validez de criterio: sensibilidad, especificidad y curva ROC</summary>
+    <div class="module-body">
+      <p>Cuando la validez concurrente o predictiva se evalúa contra un <b>criterio diagnóstico binario</b> (enfermo/sano, cae/no cae), se cuantifica con una tabla 2×2 frente al gold standard.</p>
+      <table class="ref">
+        <tr><th>Índice</th><th>Fórmula</th><th>Interpretación</th></tr>
+        <tr><td>Sensibilidad</td><td>VP / (VP+FN)</td><td>Capacidad de detectar verdaderos positivos (enfermos)</td></tr>
+        <tr><td>Especificidad</td><td>VN / (VN+FP)</td><td>Capacidad de detectar verdaderos negativos (sanos)</td></tr>
+        <tr><td>VPP</td><td>VP / (VP+FP)</td><td>Probabilidad de estar enfermo si la prueba es positiva</td></tr>
+        <tr><td>VPN</td><td>VN / (VN+FN)</td><td>Probabilidad de estar sano si la prueba es negativa</td></tr>
+        <tr><td>LR+</td><td>Sens / (1−Esp)</td><td>Cuánto aumenta la probabilidad post-prueba si sale positiva</td></tr>
+        <tr><td>LR−</td><td>(1−Sens) / Esp</td><td>Cuánto disminuye la probabilidad post-prueba si sale negativa</td></tr>
+      </table>
+      <div class="rule">Regla mnemotécnica: <b>SnNout</b> — test muy Sensible, si sale Negativo, descarta (rule OUT). <b>SpPin</b> — test muy Específico, si sale Positivo, confirma (rule IN).</div>
+      <h4>Curva ROC y AUC</h4>
+      <p>Cuando la prueba es continua (ej. fuerza de prensión en kg, tiempo en segundos) y no hay un punto de corte fijo, la <b>curva ROC</b> grafica sensibilidad (eje Y) vs. 1−especificidad (eje X) para cada posible punto de corte. El <b>AUC</b> (área bajo la curva) resume la capacidad discriminativa global.</p>
+      <table class="ref">
+        <tr><th>AUC</th><th>Interpretación</th></tr>
+        <tr><td>0.50</td><td>Sin capacidad discriminativa (igual al azar)</td></tr>
+        <tr><td>0.70 – 0.80</td><td>Aceptable</td></tr>
+        <tr><td>0.80 – 0.90</td><td>Excelente</td></tr>
+        <tr><td>&gt; 0.90</td><td>Sobresaliente</td></tr>
+      </table>
+      <p>El <b>índice de Youden (J = Sensibilidad + Especificidad − 1)</b> se usa para identificar el punto de corte óptimo de la curva.</p>
+      <p class="hint">→ Calcula sensibilidad/especificidad con una tabla 2×2 en <b>Sens/Esp</b>, o genera la curva ROC y el AUC a partir de datos continuos en <b>ROC / AUC</b>.</p>
+    </div>
+  </details>
+
+  <details class="module">
+    <summary><span class="num">09</span> Mapa mental rápido para el examen</summary>
+    <div class="module-body">
+      <h4>Validez — ¿quién hace el juicio?</h4>
+      <p>Pacientes → APARENTE · Expertos → CONTENIDO · Hipótesis/teoría → CONSTRUCTO · Mismo momento vs. gold standard → CONCURRENTE · Futuro → PREDICTIVA</p>
+      <h4>Confiabilidad — ¿cuántos evaluadores?</h4>
+      <p>Uno, dos momentos → TEST-RETEST · Uno, misma sesión → INTRA-EVALUADOR · Dos o más, independientes → INTER-EVALUADOR · Ítems que miden lo mismo (α de Cronbach) → CONSISTENCIA INTERNA</p>
+      <h4>Techo / suelo</h4>
+      <p>Puntuaciones en el extremo MÁXIMO → TECHO · En el extremo MÍNIMO/CERO → SUELO</p>
+      <h4>Error de medida</h4>
+      <p>SEM pequeño = preciso. Cambio observado &gt; MDC → cambio REAL. Cambio observado ≤ MDC → podría ser error.</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ================= ICC ================= -->
+<section class="view" id="calc-icc">
+  <div class="card">
+    <h3>Calculadora de ICC (Coeficiente de Correlación Intraclase)</h3>
+    <p class="desc">Ingresa las mediciones de cada sujeto (filas) por cada evaluador o intento (columnas) — por ejemplo, la fuerza de prensión en kg registrada por 2–3 evaluadores con un dinamómetro. Calcula ICC(2,1) y ICC(3,1) mediante ANOVA de dos vías.</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmulas</div>
+      <code>ICC(2,1) = (MSR − MSE) / (MSR + (k−1)·MSE + (k/n)·(MSC−MSE))</code>
+      <code>ICC(3,1) = (MSR − MSE) / (MSR + (k−1)·MSE)</code>
+      <p>MSR = cuadrado medio entre sujetos · MSC = cuadrado medio entre evaluadores · MSE = cuadrado medio del error · n = sujetos · k = evaluadores. Interpretación: &lt;0.50 pobre · 0.50–0.75 moderada · 0.75–0.90 buena · &gt;0.90 excelente.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="icc-preset" onchange="loadIccPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="dinamometro-inter">Dinamómetro de presión manual — confiabilidad inter-evaluador (3 evaluadores, 6 pacientes, kg)</option>
+      <option value="goniometro-intra">Goniómetro digital de rodilla — confiabilidad intra-evaluador (3 mediciones, 6 pacientes, °)</option>
+      <option value="celdacarga-testretest">Célula de carga isocinética — test-retest (2 momentos, 8 pacientes, Nm)</option>
+      <option value="podometro-bajo">Plantilla de presión plantar — ejemplo con ICC bajo (2 evaluadores, 5 pacientes)</option>
+    </select>
+
+    <label>Sujetos (filas)</label>
+    <input type="number" id="icc-n" min="2" max="30" value="5">
+    <label>Evaluadores / intentos (columnas)</label>
+    <input type="number" id="icc-k" min="2" max="10" value="3">
+    <button class="mini-btn" onclick="buildIccTable()">Generar tabla vacía</button>
+
+    <div style="overflow-x:auto;">
+      <table class="table-input" id="icc-table"></table>
+    </div>
+
+    <label>Modelo</label>
+    <select id="icc-model">
+      <option value="2">ICC(2,1) — dos vías aleatorio, concordancia absoluta (evaluadores intercambiables)</option>
+      <option value="3">ICC(3,1) — dos vías mixto, consistencia (mismos evaluadores fijos)</option>
+    </select>
+
+    <button class="run" onclick="calcICC()">Calcular ICC</button>
+    <div class="result" id="icc-result">
+      <div class="label">ICC (medición única)</div>
+      <div class="big" id="icc-value">—</div>
+      <div id="icc-tag"></div>
+      <div class="interp" id="icc-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEST-RETEST ================= -->
+<section class="view" id="calc-testretest">
+  <div class="card">
+    <h3>Confiabilidad test-retest</h3>
+    <p class="desc">Ingresa dos mediciones del mismo evaluador, en dos momentos diferentes sin intervención entre ellos (ej. lunes y miércoles), para el mismo grupo de pacientes. Obtén el ICC, el sesgo (Bland-Altman), los límites de acuerdo, el SEM y el MDC en un solo panel.</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmulas</div>
+      <code>Sesgo = media(T2 − T1)</code>
+      <code>Límites de acuerdo 95% = Sesgo ± 1.96 · SD(T2−T1)</code>
+      <code>SEM = SD(T2−T1) / √2 &nbsp;·&nbsp; MDC = SEM × 1.65 (90%) o 1.96 (95%) × √2</code>
+      <p>Si el 95% de las diferencias cae dentro de los límites de acuerdo y el sesgo es cercano a 0, no hay error sistemático entre T1 y T2.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="tr-preset" onchange="loadTrPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="goniometro">Goniómetro — flexión de rodilla, lunes vs. miércoles (°)</option>
+      <option value="dinamometro">Dinamómetro de presión — mismo día, 30 min de diferencia (kg)</option>
+      <option value="tug">TUG — dos sesiones separadas (s)</option>
+    </select>
+
+    <label>Sujetos (filas)</label>
+    <input type="number" id="tr-n" min="2" max="30" value="6">
+    <button class="mini-btn" onclick="buildTrTable()">Generar tabla vacía</button>
+
+    <div style="overflow-x:auto;">
+      <table class="table-input" id="tr-table"></table>
+    </div>
+
+    <button class="run" onclick="calcTestRetest()">Calcular confiabilidad test-retest</button>
+
+    <div class="result" id="tr-result">
+      <div class="row3">
+        <div><div class="label">ICC(3,1) consistencia</div><div class="big" id="tr-icc">—</div></div>
+        <div><div class="label">Sesgo (T2−T1)</div><div class="big" id="tr-bias">—</div></div>
+        <div><div class="label">SEM</div><div class="big" id="tr-sem">—</div></div>
+      </div>
+      <div class="row3" style="margin-top:14px;">
+        <div><div class="label">Límites de acuerdo 95%</div><div class="big" id="tr-loa" style="font-size:18px;">—</div></div>
+        <div><div class="label">MDC 90%</div><div class="big" id="tr-mdc90">—</div></div>
+        <div><div class="label">MDC 95%</div><div class="big" id="tr-mdc95">—</div></div>
+      </div>
+      <div style="margin-top:16px; background:#0f2224; border-radius:2px; padding:10px;">
+        <div class="label" style="margin-bottom:6px;">Gráfico de Bland-Altman</div>
+        <svg id="tr-svg" viewBox="0 0 340 260" style="width:100%; max-width:380px; display:block; margin:0 auto;"></svg>
+      </div>
+      <div class="interp" id="tr-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SEM / MDC ================= -->
+<section class="view" id="calc-semmdc">
+  <div class="card">
+    <h3>SEM y MDC (Error Estándar de Medida / Cambio Mínimo Detectable)</h3>
+    <p class="desc">A partir de la desviación estándar (SD) de tus mediciones y el ICC del instrumento (calculado en la pestaña anterior o conocido de la literatura), obtén el SEM y el MDC al 90% y 95% de confianza.</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmulas</div>
+      <code>SEM = SD × √(1 − ICC)</code>
+      <code>MDC90 = SEM × 1.65 × √2 &nbsp;·&nbsp; MDC95 = SEM × 1.96 × √2</code>
+      <p>Un cambio en un paciente individual solo se considera "real" (no atribuible al error de medida) si supera el MDC.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="sem-preset" onchange="loadSemPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="prension">Dinamómetro de presión manual (fuerza de prensión, kg)</option>
+      <option value="goniometro">Goniómetro digital — flexión de rodilla (°)</option>
+      <option value="berg">Escala de equilibrio de Berg (puntos)</option>
+      <option value="tug">Timed Up and Go — TUG (segundos)</option>
+    </select>
+
+    <div class="row">
+      <div>
+        <label>Desviación estándar (SD) de las mediciones</label>
+        <input type="number" id="sem-sd" step="any" placeholder="ej. 4.2 kg">
+      </div>
+      <div>
+        <label>ICC del instrumento (0–1)</label>
+        <input type="number" id="sem-icc" step="any" min="0" max="1" placeholder="ej. 0.90">
+      </div>
+    </div>
+    <button class="run" onclick="calcSEM()">Calcular SEM / MDC</button>
+    <button class="ghost" onclick="useIccResult()">Usar el último ICC calculado</button>
+    <div class="result" id="sem-result">
+      <div class="row3">
+        <div><div class="label">SEM</div><div class="big" id="sem-value">—</div></div>
+        <div><div class="label">MDC 90%</div><div class="big" id="mdc90-value">—</div></div>
+        <div><div class="label">MDC 95%</div><div class="big" id="mdc95-value">—</div></div>
+      </div>
+      <div class="interp">SEM = SD × √(1 − ICC) &nbsp;·&nbsp; MDC = SEM × 1.65 (90%) o 1.96 (95%) × √2</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CAMBIO REAL ================= -->
+<section class="view" id="calc-cambio">
+  <div class="card">
+    <h3>¿El cambio observado es real?</h3>
+    <p class="desc">Compara una medición basal y de seguimiento (ej. goniometría, dinamometría) contra el MDC del instrumento para saber si el cambio supera el error de medida.</p>
+    <div class="formula-box">
+      <div class="ftitle">Regla de decisión</div>
+      <code>Cambio observado = Medición 2 − Medición 1</code>
+      <code>Si |Cambio observado| &gt; MDC → cambio REAL</code>
+      <p>Si el cambio no supera el MDC, no se puede descartar que se deba únicamente al error de medida del instrumento.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="ch-preset" onchange="loadChPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="goniometria">Goniometría de rodilla (95° → 103°, MDC=6°) → cambio real</option>
+      <option value="dinamometria">Dinamometría de cuádriceps (180 Nm → 182 Nm, MDC=15 Nm) → posible error</option>
+      <option value="tug">TUG (12.4 s → 10.1 s, MDC=3.5 s) → cambio real</option>
+    </select>
+
+    <div class="row3">
+      <div><label>Medición basal</label><input type="number" id="ch-a" step="any" placeholder="ej. 95"></div>
+      <div><label>Medición de seguimiento</label><input type="number" id="ch-b" step="any" placeholder="ej. 103"></div>
+      <div><label>MDC del instrumento</label><input type="number" id="ch-mdc" step="any" placeholder="ej. 6"></div>
+    </div>
+    <button class="run" onclick="calcCambio()">Evaluar cambio</button>
+    <div class="result" id="ch-result">
+      <div class="label">Cambio observado</div>
+      <div class="big" id="ch-value">—</div>
+      <div class="interp" id="ch-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CORRELACIÓN ================= -->
+<section class="view" id="calc-r">
+  <div class="card">
+    <h3>Correlación de Pearson (r)</h3>
+    <p class="desc">Pega tus pares de valores X e Y (uno por línea, separados por coma o espacio) — por ejemplo, fuerza de prensión (X) vs. tiempo de reacción (Y).</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmula</div>
+      <code>r = Σ(x−x̄)(y−ȳ) / √[Σ(x−x̄)² · Σ(y−ȳ)²]</code>
+      <p>r va de −1 a +1. |r|&lt;0.3 débil · 0.3–0.5 baja-moderada · 0.5–0.7 moderada-fuerte · 0.7–0.9 fuerte · &gt;0.9 muy fuerte. Correlación no implica causalidad.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="r-preset" onchange="loadRPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="fuerza-reaccion">Fuerza de prensión (kg) vs. tiempo de reacción (ms) — relación negativa</option>
+      <option value="fuerza-edad">Fuerza de prensión (kg) vs. edad (años) — relación negativa fuerte</option>
+      <option value="berg-caidas">Puntaje Berg vs. número de caídas en 6 meses — relación negativa</option>
+    </select>
+
+    <label>Datos (X , Y por línea)</label>
+    <textarea id="r-data" placeholder="95, 12&#10;103, 14&#10;88, 10&#10;..."></textarea>
+    <button class="run" onclick="calcR()">Calcular r</button>
+    <div class="result" id="r-result">
+      <div class="label">Coeficiente r de Pearson</div>
+      <div class="big" id="r-value">—</div>
+      <div class="interp" id="r-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ALFA DE CRONBACH ================= -->
+<section class="view" id="calc-alfa">
+  <div class="card">
+    <h3>Alfa de Cronbach (consistencia interna)</h3>
+    <p class="desc">Ingresa la matriz de puntuaciones: cada fila es un sujeto/paciente, cada columna un ítem del cuestionario o escala.</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmula</div>
+      <code>α = (k / (k−1)) × (1 − Σvar(ítem) / var(total))</code>
+      <p>k = número de ítems. α&lt;0.5 inaceptable · 0.6 pobre · 0.7 cuestionable · 0.7–0.8 aceptable · 0.8–0.9 buena · &gt;0.9 excelente (revisar redundancia).</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="alfa-preset" onchange="loadAlfaPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="satisfaccion">Cuestionario de satisfacción con la terapia (4 ítems, escala 1–5)</option>
+      <option value="autoeficacia">Escala de autoeficacia para el ejercicio (5 ítems, escala 1–7)</option>
+      <option value="bajo">Ejemplo con ítems poco relacionados (α bajo)</option>
+    </select>
+
+    <div class="row">
+      <div><label>Sujetos (filas)</label><input type="number" id="al-n" min="2" max="30" value="5"></div>
+      <div><label>Ítems (columnas)</label><input type="number" id="al-k" min="2" max="12" value="4"></div>
+    </div>
+    <button class="mini-btn" onclick="buildAlfaTable()">Generar tabla vacía</button>
+    <div style="overflow-x:auto;"><table class="table-input" id="alfa-table"></table></div>
+    <button class="run" onclick="calcAlfa()">Calcular α</button>
+    <div class="result" id="alfa-result">
+      <div class="label">Alfa de Cronbach</div>
+      <div class="big" id="alfa-value">—</div>
+      <div class="interp" id="alfa-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TECHO / SUELO ================= -->
+<section class="view" id="calc-techosuelo">
+  <div class="card">
+    <h3>Detección de efecto techo / suelo</h3>
+    <p class="desc">Ingresa las puntuaciones de tu muestra y el rango teórico del instrumento. La regla general considera efecto techo/suelo relevante cuando ≥15% de la muestra obtiene la puntuación mínima o máxima posible.</p>
+    <div class="formula-box">
+      <div class="ftitle">Regla</div>
+      <code>% en el mínimo = (n con puntuación mínima / n total) × 100 → efecto SUELO</code>
+      <code>% en el máximo = (n con puntuación máxima / n total) × 100 → efecto TECHO</code>
+      <p>Umbral habitual: ≥15% de la muestra en el extremo se considera un efecto techo/suelo clínicamente relevante.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="ts-preset" onchange="loadTsPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="berg-ninos">Escala de Berg en niños con desarrollo típico (rango 0–56) — efecto techo</option>
+      <option value="illinois-acv">Illinois Agility Test en ACV agudo (rango 0–60 s convertido a puntos 0–100) — efecto suelo</option>
+      <option value="sin-efecto">Escala de equilibrio en muestra mixta — sin efecto relevante</option>
+    </select>
+
+    <div class="row3">
+      <div><label>Puntuación mínima posible</label><input type="number" id="ts-min" step="any" placeholder="ej. 0"></div>
+      <div><label>Puntuación máxima posible</label><input type="number" id="ts-max" step="any" placeholder="ej. 56"></div>
+      <div><label>Umbral de alerta (%)</label><input type="number" id="ts-thresh" step="any" value="15"></div>
+    </div>
+    <label>Puntuaciones de la muestra (separadas por coma, espacio o salto de línea)</label>
+    <textarea id="ts-data" placeholder="56, 54, 56, 48, 56, 30, 56..."></textarea>
+    <button class="run" onclick="calcTechoSuelo()">Analizar muestra</button>
+    <div class="result" id="ts-result">
+      <div class="row">
+        <div><div class="label">% en mínimo (suelo)</div><div class="big" id="ts-suelo">—</div></div>
+        <div><div class="label">% en máximo (techo)</div><div class="big" id="ts-techo">—</div></div>
+      </div>
+      <div class="interp" id="ts-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIPO DE VALIDEZ (guía interactiva) ================= -->
+<section class="view" id="calc-validez">
+  <div class="card">
+    <h3>Identificador de tipo de validez</h3>
+    <p class="desc">La validez no se calcula con una fórmula: se identifica por el diseño del estudio. Responde estas dos preguntas para reconocer el tipo evaluado en un caso clínico.</p>
+    <div class="formula-box">
+      <div class="ftitle">Criterio de decisión</div>
+      <code>Pacientes juzgan → Aparente &nbsp;·&nbsp; Expertos juzgan cobertura → Contenido</code>
+      <code>Hipótesis/teoría → Constructo &nbsp;·&nbsp; Gold standard mismo momento → Concurrente &nbsp;·&nbsp; Gold standard futuro → Predictiva</code>
+    </div>
+    <label>¿Quién emite el juicio sobre el instrumento?</label>
+    <select id="v-who" onchange="calcValidez()">
+      <option value="">Selecciona…</option>
+      <option value="pacientes">Pacientes / usuarios, a primera vista</option>
+      <option value="expertos">Expertos, al diseñar el instrumento (cobertura de dominios)</option>
+      <option value="teoria">Investigadores, mediante hipótesis teóricas / correlaciones esperadas</option>
+      <option value="externo">Investigadores, comparando con un criterio externo (gold standard)</option>
+    </select>
+    <div id="v-when-wrap" style="display:none;">
+      <label>¿Cuándo se mide el criterio externo?</label>
+      <select id="v-when" onchange="calcValidez()">
+        <option value="">Selecciona…</option>
+        <option value="mismo">En el mismo momento</option>
+        <option value="futuro">En el futuro</option>
+      </select>
+    </div>
+    <div class="result show" id="v-result" style="margin-top:20px;">
+      <div class="label">Tipo de validez</div>
+      <div class="big" id="v-value">Completa las preguntas</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VALIDEZ CONCURRENTE ================= -->
+<section class="view" id="calc-concurrente">
+  <div class="card">
+    <h3>Validez concurrente (instrumento nuevo vs. gold standard)</h3>
+    <p class="desc">Cuando ambos instrumentos miden una variable continua al mismo tiempo (ej. altura de salto con plataforma de contacto vs. plataforma de fuerza como criterio de referencia), la validez concurrente NO se evalúa con el ICC de confiabilidad — se combina correlación de Pearson, ICC de acuerdo absoluto y Bland-Altman contra el gold standard.</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmulas</div>
+      <code>r de Pearson → fuerza de la asociación lineal (no basta sola: dos instrumentos pueden correlacionar alto y aun así estar sesgados)</code>
+      <code>ICC(2,1) acuerdo absoluto → si los valores coinciden en magnitud, no solo en tendencia</code>
+      <code>Sesgo = media(Instrumento − Gold standard) &nbsp;·&nbsp; LoA 95% = Sesgo ± 1.96·SD(diferencias)</code>
+      <p>Un instrumento válido frente al gold standard debe tener r alto, ICC alto Y un sesgo cercano a 0 con límites de acuerdo clínicamente aceptables.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="cc-preset" onchange="loadCcPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="salto">Plataforma de contacto vs. plataforma de fuerza — altura de salto (cm)</option>
+      <option value="dinamometro">Dinamómetro portátil vs. dinamómetro isocinético — fuerza de cuádriceps (Nm)</option>
+      <option value="app-rom">App móvil de goniometría vs. goniómetro universal — flexión de hombro (°)</option>
+    </select>
+
+    <label>Sujetos (filas)</label>
+    <input type="number" id="cc-n" min="2" max="30" value="6">
+    <button class="mini-btn" onclick="buildCcTable()">Generar tabla vacía</button>
+
+    <div style="overflow-x:auto;">
+      <table class="table-input" id="cc-table"></table>
+    </div>
+
+    <button class="run" onclick="calcConcurrente()">Calcular validez concurrente</button>
+
+    <div class="result" id="cc-result">
+      <div class="row3">
+        <div><div class="label">r de Pearson</div><div class="big" id="cc-r">—</div></div>
+        <div><div class="label">ICC(2,1) acuerdo absoluto</div><div class="big" id="cc-icc">—</div></div>
+        <div><div class="label">Sesgo</div><div class="big" id="cc-bias">—</div></div>
+      </div>
+      <div class="row" style="margin-top:14px;">
+        <div><div class="label">Límites de acuerdo 95%</div><div class="big" id="cc-loa" style="font-size:18px;">—</div></div>
+      </div>
+      <div style="margin-top:16px; background:#0f2224; border-radius:2px; padding:10px;">
+        <div class="label" style="margin-bottom:6px;">Bland-Altman: Instrumento vs. gold standard</div>
+        <svg id="cc-svg" viewBox="0 0 340 260" style="width:100%; max-width:380px; display:block; margin:0 auto;"></svg>
+      </div>
+      <div class="interp" id="cc-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SENSIBILIDAD / ESPECIFICIDAD ================= -->
+<section class="view" id="calc-sensesp">
+  <div class="card">
+    <h3>Sensibilidad, especificidad y razones de verosimilitud</h3>
+    <p class="desc">Ingresa la tabla 2×2 comparando tu prueba (ej. Romberg, cribado de sarcopenia con dinamómetro) contra el criterio de referencia (gold standard).</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmulas</div>
+      <code>Sensibilidad = VP/(VP+FN) &nbsp;·&nbsp; Especificidad = VN/(VN+FP)</code>
+      <code>VPP = VP/(VP+FP) &nbsp;·&nbsp; VPN = VN/(VN+FN)</code>
+      <code>LR+ = Sens/(1−Esp) &nbsp;·&nbsp; LR− = (1−Sens)/Esp</code>
+      <p>SnNout: sensibilidad alta → un resultado negativo descarta. SpPin: especificidad alta → un resultado positivo confirma.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="se-preset" onchange="loadSePreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="romberg">Test de Romberg vs. riesgo real de caídas (n=100)</option>
+      <option value="sarcopenia">Dinamometría de prensión (punto de corte) vs. diagnóstico de sarcopenia (n=120)</option>
+      <option value="tug-caidas">TUG ≥13.5 s vs. caídas en 6 meses (n=80)</option>
+    </select>
+
+    <div class="row" style="grid-template-columns:1fr 1fr;">
+      <div>
+        <label>Verdaderos positivos (VP)</label>
+        <input type="number" id="se-vp" min="0" placeholder="ej. 42">
+        <label>Falsos negativos (FN)</label>
+        <input type="number" id="se-fn" min="0" placeholder="ej. 8">
+      </div>
+      <div>
+        <label>Falsos positivos (FP)</label>
+        <input type="number" id="se-fp" min="0" placeholder="ej. 12">
+        <label>Verdaderos negativos (VN)</label>
+        <input type="number" id="se-vn" min="0" placeholder="ej. 38">
+      </div>
+    </div>
+    <p class="hint">Filas = resultado de tu prueba (positivo/negativo) · Columnas = condición real según el gold standard (presente/ausente).</p>
+    <button class="run" onclick="calcSensEsp()">Calcular</button>
+
+    <div class="result" id="se-result">
+      <div class="row3">
+        <div><div class="label">Sensibilidad</div><div class="big" id="se-sens">—</div></div>
+        <div><div class="label">Especificidad</div><div class="big" id="se-esp">—</div></div>
+        <div><div class="label">Exactitud</div><div class="big" id="se-acc">—</div></div>
+      </div>
+      <div class="row3" style="margin-top:14px;">
+        <div><div class="label">VPP</div><div class="big" id="se-vpp">—</div></div>
+        <div><div class="label">VPN</div><div class="big" id="se-vpn">—</div></div>
+        <div><div class="label">LR+ / LR−</div><div class="big" id="se-lr">—</div></div>
+      </div>
+      <div class="interp" id="se-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROC / AUC ================= -->
+<section class="view" id="calc-roc">
+  <div class="card">
+    <h3>Curva ROC y AUC</h3>
+    <p class="desc">Ingresa una lista de pares "valor de la prueba, condición" (condición = 1 si el paciente tiene la condición/criterio positivo, 0 si no). Por ejemplo, fuerza de prensión (kg) vs. diagnóstico de sarcopenia (1/0).</p>
+    <div class="formula-box">
+      <div class="ftitle">Fórmulas</div>
+      <code>Para cada punto de corte: Sensibilidad (eje Y) vs. 1−Especificidad (eje X)</code>
+      <code>AUC = Σ área bajo la curva (regla del trapecio)</code>
+      <code>Índice de Youden J = Sensibilidad + Especificidad − 1 (máximo = punto de corte óptimo)</code>
+      <p>AUC: 0.50 azar · 0.70–0.80 aceptable · 0.80–0.90 excelente · &gt;0.90 sobresaliente.</p>
+    </div>
+
+    <label>Set de datos preestablecido (carga y calcula automáticamente)</label>
+    <select id="roc-preset" onchange="loadRocPreset()">
+      <option value="">— Datos manuales —</option>
+      <option value="prension-sarcopenia">Fuerza de prensión (kg) vs. sarcopenia (menor fuerza → más probable)</option>
+      <option value="tug-caidas">TUG (segundos) vs. riesgo de caída (mayor tiempo → más probable)</option>
+    </select>
+
+    <label>Datos (valor de la prueba , condición 0/1 por línea)</label>
+    <textarea id="roc-data" placeholder="18, 1&#10;32, 0&#10;22, 1&#10;..."></textarea>
+    <label>Dirección de la prueba</label>
+    <select id="roc-dir">
+      <option value="low">Valores BAJOS indican condición positiva (ej. fuerza de prensión, VO2max)</option>
+      <option value="high">Valores ALTOS indican condición positiva (ej. tiempo en TUG, dolor)</option>
+    </select>
+    <button class="run" onclick="calcROC()">Generar curva ROC</button>
+
+    <div class="result" id="roc-result">
+      <div class="row">
+        <div><div class="label">AUC</div><div class="big" id="roc-auc">—</div></div>
+        <div><div class="label">Punto de corte óptimo (Youden)</div><div class="big" id="roc-cut">—</div></div>
+      </div>
+      <div style="margin-top:14px; background:#0f2224; border-radius:2px; padding:10px;">
+        <svg id="roc-svg" viewBox="0 0 320 320" style="width:100%; max-width:340px; display:block; margin:0 auto;"></svg>
+      </div>
+      <div class="interp" id="roc-interp"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRÁCTICA ================= -->
+<section class="view" id="practica">
+  <div class="card">
+    <h3>Preguntas de práctica</h3>
+    <p class="desc">Estilo similar al examen. Elige una opción para ver el feedback.</p>
+    <div id="practice-list"></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Guía elaborada para el examen parcial 2025-20 · Taller de Herramientas de Investigación en Salud<br>
+  Universidad Peruana de Ciencias Aplicadas (UPC) · Laboratorio de Ciencias del Movimiento (LCM)
+</footer>
+
+<script>
+// ---------- Navigation ----------
+const tabs = document.querySelectorAll('nav.tabs button');
+tabs.forEach(btn=>{
+  btn.addEventListener('click', ()=>goToView(btn.dataset.view));
+});
+function goToView(view){
+  tabs.forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  document.querySelectorAll('section.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(view).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ---------- ICC ----------
+let lastICC = null;
+
+function buildIccTable(prefill){
+  const n = parseInt(document.getElementById('icc-n').value)||5;
+  const k = parseInt(document.getElementById('icc-k').value)||3;
+  const table = document.getElementById('icc-table');
+  let html = '<tr><td></td>' + Array.from({length:k},(_,j)=>`<td style="font-family:var(--mono);font-size:11px;color:var(--teal-dark);text-align:center;">Eval. ${j+1}</td>`).join('') + '</tr>';
+  for(let i=0;i<n;i++){
+    html += `<tr><td style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);">Sujeto ${i+1}</td>`;
+    for(let j=0;j<k;j++){
+      const val = (prefill && prefill[i] && prefill[i][j]!==undefined) ? prefill[i][j] : '';
+      html += `<td><input type="number" step="any" class="icc-cell" data-i="${i}" data-j="${j}" value="${val}"></td>`;
+    }
+    html += '</tr>';
+  }
+  table.innerHTML = html;
+}
+const ICC_PRESETS = {
+  'dinamometro-inter': {n:6, k:3, model:'2',
+    data:[[28,30,29],[35,34,36],[41,40,42],[22,25,23],[38,37,39],[30,29,31]]},
+  'goniometro-intra': {n:6, k:3, model:'3',
+    data:[[92,94,93],[105,104,106],[78,77,79],[110,112,111],[85,86,84],[98,97,99]]},
+  'celdacarga-testretest': {n:8, k:2, model:'3',
+    data:[[180,182],[165,163],[210,208],[190,195],[175,177],[200,198],[155,158],[220,222]]},
+  'podometro-bajo': {n:5, k:2, model:'2',
+    data:[[12,28],[35,15],[20,22],[8,30],[26,11]]}
+};
+function loadIccPreset(){
+  const key = document.getElementById('icc-preset').value;
+  if(!key) return;
+  const p = ICC_PRESETS[key];
+  document.getElementById('icc-n').value = p.n;
+  document.getElementById('icc-k').value = p.k;
+  document.getElementById('icc-model').value = p.model;
+  buildIccTable(p.data);
+  calcICC();
+}
+buildIccTable();
+
+function readMatrix(selector, n, k){
+  const cells = document.querySelectorAll(selector);
+  const M = Array.from({length:n},()=>Array(k).fill(NaN));
+  cells.forEach(c=>{
+    const i = parseInt(c.dataset.i), j = parseInt(c.dataset.j);
+    M[i][j] = parseFloat(c.value);
+  });
+  return M;
+}
+
+function calcICC(){
+  const n = parseInt(document.getElementById('icc-n').value);
+  const k = parseInt(document.getElementById('icc-k').value);
+  const M = readMatrix('.icc-cell', n, k);
+  for(const row of M){ if(row.some(v=>isNaN(v))){ alert('Completa todas las celdas de la tabla.'); return; } }
+
+  let grand=0;
+  M.forEach(row=>row.forEach(v=>grand+=v));
+  grand /= (n*k);
+
+  const rowMeans = M.map(row=>row.reduce((a,b)=>a+b,0)/k);
+  const colMeans = [];
+  for(let j=0;j<k;j++){
+    let s=0; for(let i=0;i<n;i++) s+=M[i][j];
+    colMeans.push(s/n);
+  }
+
+  let SST=0, SSR=0, SSC=0, SSE=0;
+  M.forEach(row=>row.forEach(v=>SST += Math.pow(v-grand,2)));
+  rowMeans.forEach(rm=> SSR += k*Math.pow(rm-grand,2));
+  colMeans.forEach(cm=> SSC += n*Math.pow(cm-grand,2));
+  SSE = SST - SSR - SSC;
+
+  const dfR = n-1, dfC = k-1, dfE = (n-1)*(k-1);
+  const MSR = SSR/dfR, MSC = SSC/dfC, MSE = SSE/dfE;
+
+  const model = document.getElementById('icc-model').value;
+  let icc;
+  if(model === '2'){
+    icc = (MSR - MSE) / (MSR + (k-1)*MSE + (k/n)*(MSC-MSE));
+  } else {
+    icc = (MSR - MSE) / (MSR + (k-1)*MSE);
+  }
+  lastICC = icc;
+
+  document.getElementById('icc-result').classList.add('show');
+  document.getElementById('icc-value').textContent = icc.toFixed(3);
+
+  let tagClass, tagLabel;
+  const abs = Math.abs(icc);
+  if(abs < 0.50){tagClass='pobre'; tagLabel='Pobre';}
+  else if(abs < 0.75){tagClass='moderada'; tagLabel='Moderada';}
+  else if(abs < 0.90){tagClass='buena'; tagLabel='Buena';}
+  else {tagClass='excelente'; tagLabel='Excelente';}
+  document.getElementById('icc-tag').innerHTML = `<span class="tag ${tagClass}">${tagLabel}</span>`;
+
+  const modelName = model==='2' ? 'ICC(2,1) — concordancia absoluta' : 'ICC(3,1) — consistencia';
+  document.getElementById('icc-interp').innerHTML =
+    `Modelo: ${modelName}. MSR=${MSR.toFixed(3)}, MSC=${MSC.toFixed(3)}, MSE=${MSE.toFixed(3)}. `+
+    `Confiabilidad <b>${tagLabel.toUpperCase()}</b> según los criterios: &lt;0.50 pobre · 0.50–0.75 moderada · 0.75–0.90 buena · &gt;0.90 excelente.`;
+}
+
+// ---------- TEST-RETEST ----------
+function buildTrTable(prefill){
+  const n = parseInt(document.getElementById('tr-n').value)||6;
+  const table = document.getElementById('tr-table');
+  let html = `<tr><td></td>
+    <td style="font-family:var(--mono);font-size:11px;color:var(--teal-dark);text-align:center;">Medición 1 (T1)</td>
+    <td style="font-family:var(--mono);font-size:11px;color:var(--teal-dark);text-align:center;">Medición 2 (T2)</td></tr>`;
+  for(let i=0;i<n;i++){
+    const v1 = (prefill && prefill[i] && prefill[i][0]!==undefined) ? prefill[i][0] : '';
+    const v2 = (prefill && prefill[i] && prefill[i][1]!==undefined) ? prefill[i][1] : '';
+    html += `<tr><td style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);">Sujeto ${i+1}</td>
+      <td><input type="number" step="any" class="tr-cell" data-i="${i}" data-j="0" value="${v1}"></td>
+      <td><input type="number" step="any" class="tr-cell" data-i="${i}" data-j="1" value="${v2}"></td></tr>`;
+  }
+  table.innerHTML = html;
+}
+buildTrTable();
+
+const TR_PRESETS = {
+  goniometro:[[92,94],[105,103],[78,80],[110,108],[85,87],[98,96]],
+  dinamometro:[[28,29],[35,34],[22,24],[41,40],[30,31],[38,37],[26,27],[33,32]],
+  tug:[[10.2,10.5],[13.1,12.8],[9.4,9.6],[15.0,14.7],[11.3,11.5],[12.0,11.8]]
+};
+function loadTrPreset(){
+  const key = document.getElementById('tr-preset').value;
+  if(!key) return;
+  const data = TR_PRESETS[key];
+  document.getElementById('tr-n').value = data.length;
+  buildTrTable(data);
+  calcTestRetest();
+}
+
+function stdev(arr){
+  const m = arr.reduce((a,b)=>a+b,0)/arr.length;
+  return Math.sqrt(arr.reduce((s,v)=>s+(v-m)**2,0)/(arr.length-1));
+}
+
+function calcTestRetest(){
+  const n = parseInt(document.getElementById('tr-n').value);
+  const M = readMatrix('.tr-cell', n, 2);
+  for(const row of M){ if(row.some(v=>isNaN(v))){ alert('Completa las dos columnas para todos los sujetos.'); return; } }
+
+  // ICC(3,1) two-way mixed, consistency, k=2
+  const k = 2;
+  let grand=0; M.forEach(row=>row.forEach(v=>grand+=v)); grand/=(n*k);
+  const rowMeans = M.map(row=>(row[0]+row[1])/2);
+  const colMeans = [ M.reduce((s,r)=>s+r[0],0)/n, M.reduce((s,r)=>s+r[1],0)/n ];
+  let SST=0, SSR=0, SSC=0;
+  M.forEach(row=>row.forEach(v=>SST+=(v-grand)**2));
+  rowMeans.forEach(rm=>SSR+=k*(rm-grand)**2);
+  colMeans.forEach(cm=>SSC+=n*(cm-grand)**2);
+  const SSE = SST-SSR-SSC;
+  const MSR = SSR/(n-1), MSE = SSE/((n-1)*(k-1));
+  const icc = (MSR-MSE)/(MSR+(k-1)*MSE);
+
+  // Bland-Altman
+  const diffs = M.map(r=>r[1]-r[0]);
+  const means = M.map(r=>(r[0]+r[1])/2);
+  const bias = diffs.reduce((a,b)=>a+b,0)/n;
+  const sdDiff = stdev(diffs);
+  const loaLow = bias - 1.96*sdDiff, loaHigh = bias + 1.96*sdDiff;
+
+  // SEM / MDC from SD of differences
+  const sem = sdDiff/Math.sqrt(2);
+  const mdc90 = sem*1.65*Math.sqrt(2);
+  const mdc95 = sem*1.96*Math.sqrt(2);
+
+  document.getElementById('tr-result').classList.add('show');
+  document.getElementById('tr-icc').textContent = icc.toFixed(3);
+  document.getElementById('tr-bias').textContent = (bias>=0?'+':'')+bias.toFixed(2);
+  document.getElementById('tr-sem').textContent = sem.toFixed(2);
+  document.getElementById('tr-loa').textContent = `${loaLow.toFixed(2)} a ${loaHigh.toFixed(2)}`;
+  document.getElementById('tr-mdc90').textContent = mdc90.toFixed(2);
+  document.getElementById('tr-mdc95').textContent = mdc95.toFixed(2);
+
+  // Bland-Altman plot
+  const svg = document.getElementById('tr-svg');
+  const padL=40, padT=20, w=270, h=200;
+  const xMin = Math.min(...means), xMax = Math.max(...means);
+  const yVals = [...diffs, loaLow, loaHigh, bias];
+  const yMin = Math.min(...yVals), yMax = Math.max(...yVals);
+  const xPad = (xMax-xMin || 1)*0.15, yPad = (yMax-yMin || 1)*0.25;
+  const xScale = x => padL + ((x-(xMin-xPad))/((xMax+xPad)-(xMin-xPad)))*w;
+  const yScale = y => padT + h - ((y-(yMin-yPad))/((yMax+yPad)-(yMin-yPad)))*h;
+  let parts = [];
+  parts.push(`<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+h}" stroke="#5D9E8D" stroke-width="1"/>`);
+  parts.push(`<line x1="${padL}" y1="${padT+h}" x2="${padL+w}" y2="${padT+h}" stroke="#5D9E8D" stroke-width="1"/>`);
+  [ {y:bias,color:'#C08829',dash:'0'}, {y:loaLow,color:'#9C4630',dash:'4,3'}, {y:loaHigh,color:'#9C4630',dash:'4,3'} ].forEach(l=>{
+    const yy = yScale(l.y);
+    parts.push(`<line x1="${padL}" y1="${yy}" x2="${padL+w}" y2="${yy}" stroke="${l.color}" stroke-width="1.3" stroke-dasharray="${l.dash}"/>`);
+  });
+  means.forEach((m,i)=>{
+    parts.push(`<circle cx="${xScale(m)}" cy="${yScale(diffs[i])}" r="3.5" fill="#5D9E8D"/>`);
+  });
+  parts.push(`<text x="${padL}" y="${padT-6}" fill="#8FB3AA" font-size="10" font-family="monospace">Diferencia (T2−T1)</text>`);
+  parts.push(`<text x="${padL+w-60}" y="${padT+h+16}" fill="#8FB3AA" font-size="10" font-family="monospace">Media (T1,T2)</text>`);
+  svg.innerHTML = parts.join('');
+
+  let tag = Math.abs(icc)<0.5?'pobre':Math.abs(icc)<0.75?'moderada':Math.abs(icc)<0.9?'buena':'excelente';
+  document.getElementById('tr-interp').innerHTML =
+    `Confiabilidad test-retest <b>${tag.toUpperCase()}</b> (ICC=${icc.toFixed(3)}). `+
+    `Sesgo sistemático entre T1 y T2: ${bias.toFixed(2)}. El 95% de las diferencias individuales debería caer entre `+
+    `${loaLow.toFixed(2)} y ${loaHigh.toFixed(2)} (límites de acuerdo de Bland-Altman). MDC95 = ${mdc95.toFixed(2)}: cambios mayores a este valor en una nueva medición se consideran reales.`;
+}
+
+// ---------- VALIDEZ CONCURRENTE ----------
+function buildCcTable(prefill){
+  const n = parseInt(document.getElementById('cc-n').value)||6;
+  const table = document.getElementById('cc-table');
+  let html = `<tr><td></td>
+    <td style="font-family:var(--mono);font-size:11px;color:var(--teal-dark);text-align:center;">Instrumento nuevo</td>
+    <td style="font-family:var(--mono);font-size:11px;color:var(--teal-dark);text-align:center;">Gold standard</td></tr>`;
+  for(let i=0;i<n;i++){
+    const v1 = (prefill && prefill[i] && prefill[i][0]!==undefined) ? prefill[i][0] : '';
+    const v2 = (prefill && prefill[i] && prefill[i][1]!==undefined) ? prefill[i][1] : '';
+    html += `<tr><td style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);">Sujeto ${i+1}</td>
+      <td><input type="number" step="any" class="cc-cell" data-i="${i}" data-j="0" value="${v1}"></td>
+      <td><input type="number" step="any" class="cc-cell" data-i="${i}" data-j="1" value="${v2}"></td></tr>`;
+  }
+  table.innerHTML = html;
+}
+buildCcTable();
+
+const CC_PRESETS = {
+  salto:[[38.2,36.5],[42.0,40.8],[35.1,33.9],[45.6,44.0],[30.4,29.5],[40.0,38.6]],
+  dinamometro:[[178,182],[165,160],[210,205],[190,196],[175,170],[200,207]],
+  'app-rom':[[142,145],[158,155],[130,133],[165,168],[120,118],[150,152]]
+};
+function loadCcPreset(){
+  const key = document.getElementById('cc-preset').value;
+  if(!key) return;
+  const data = CC_PRESETS[key];
+  document.getElementById('cc-n').value = data.length;
+  buildCcTable(data);
+  calcConcurrente();
+}
+
+function calcConcurrente(){
+  const n = parseInt(document.getElementById('cc-n').value);
+  const M = readMatrix('.cc-cell', n, 2);
+  for(const row of M){ if(row.some(v=>isNaN(v))){ alert('Completa las dos columnas para todos los sujetos.'); return; } }
+
+  // Pearson r
+  const xs = M.map(r=>r[0]), ys = M.map(r=>r[1]);
+  const mx = xs.reduce((a,b)=>a+b,0)/n, my = ys.reduce((a,b)=>a+b,0)/n;
+  let num=0, dx2=0, dy2=0;
+  M.forEach(([x,y])=>{ num += (x-mx)*(y-my); dx2 += (x-mx)**2; dy2 += (y-my)**2; });
+  const r = num/Math.sqrt(dx2*dy2);
+
+  // ICC(2,1) absolute agreement, k=2
+  const k=2;
+  let grand=0; M.forEach(row=>row.forEach(v=>grand+=v)); grand/=(n*k);
+  const rowMeans = M.map(row=>(row[0]+row[1])/2);
+  const colMeans = [mx, my];
+  let SST=0, SSR=0, SSC=0;
+  M.forEach(row=>row.forEach(v=>SST+=(v-grand)**2));
+  rowMeans.forEach(rm=>SSR+=k*(rm-grand)**2);
+  colMeans.forEach(cm=>SSC+=n*(cm-grand)**2);
+  const SSE = SST-SSR-SSC;
+  const MSR = SSR/(n-1), MSC=SSC/(k-1), MSE = SSE/((n-1)*(k-1));
+  const icc = (MSR-MSE)/(MSR+(k-1)*MSE+(k/n)*(MSC-MSE));
+
+  // Bland-Altman: diff = instrumento - gold standard
+  const diffs = M.map(row=>row[0]-row[1]);
+  const means = M.map(row=>(row[0]+row[1])/2);
+  const bias = diffs.reduce((a,b)=>a+b,0)/n;
+  const sdDiff = stdev(diffs);
+  const loaLow = bias-1.96*sdDiff, loaHigh = bias+1.96*sdDiff;
+
+  document.getElementById('cc-result').classList.add('show');
+  document.getElementById('cc-r').textContent = r.toFixed(3);
+  document.getElementById('cc-icc').textContent = icc.toFixed(3);
+  document.getElementById('cc-bias').textContent = (bias>=0?'+':'')+bias.toFixed(2);
+  document.getElementById('cc-loa').textContent = `${loaLow.toFixed(2)} a ${loaHigh.toFixed(2)}`;
+
+  const svg = document.getElementById('cc-svg');
+  const padL=40, padT=20, w=270, h=200;
+  const xMin=Math.min(...means), xMax=Math.max(...means);
+  const yVals=[...diffs, loaLow, loaHigh, bias];
+  const yMin=Math.min(...yVals), yMax=Math.max(...yVals);
+  const xPad=(xMax-xMin||1)*0.15, yPad=(yMax-yMin||1)*0.25;
+  const xScale = x => padL + ((x-(xMin-xPad))/((xMax+xPad)-(xMin-xPad)))*w;
+  const yScale = y => padT + h - ((y-(yMin-yPad))/((yMax+yPad)-(yMin-yPad)))*h;
+  let parts=[];
+  parts.push(`<line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT+h}" stroke="#5D9E8D" stroke-width="1"/>`);
+  parts.push(`<line x1="${padL}" y1="${padT+h}" x2="${padL+w}" y2="${padT+h}" stroke="#5D9E8D" stroke-width="1"/>`);
+  [{y:bias,color:'#C08829',dash:'0'},{y:loaLow,color:'#9C4630',dash:'4,3'},{y:loaHigh,color:'#9C4630',dash:'4,3'}].forEach(l=>{
+    const yy=yScale(l.y);
+    parts.push(`<line x1="${padL}" y1="${yy}" x2="${padL+w}" y2="${yy}" stroke="${l.color}" stroke-width="1.3" stroke-dasharray="${l.dash}"/>`);
+  });
+  means.forEach((m,i)=>{ parts.push(`<circle cx="${xScale(m)}" cy="${yScale(diffs[i])}" r="3.5" fill="#5D9E8D"/>`); });
+  parts.push(`<text x="${padL}" y="${padT-6}" fill="#8FB3AA" font-size="10" font-family="monospace">Dif. (Instrumento−Gold)</text>`);
+  parts.push(`<text x="${padL+w-100}" y="${padT+h+16}" fill="#8FB3AA" font-size="10" font-family="monospace">Media (Instr., Gold)</text>`);
+  svg.innerHTML = parts.join('');
+
+  const rQual = Math.abs(r)<0.5?'baja':Math.abs(r)<0.7?'moderada':Math.abs(r)<0.9?'fuerte':'muy fuerte';
+  const iccQual = Math.abs(icc)<0.5?'pobre':Math.abs(icc)<0.75?'moderada':Math.abs(icc)<0.9?'buena':'excelente';
+  document.getElementById('cc-interp').innerHTML =
+    `Correlación ${rQual} (r=${r.toFixed(3)}) y concordancia ${iccQual.toUpperCase()} (ICC=${icc.toFixed(3)}) con el gold standard. `+
+    `Sesgo sistemático: ${bias.toFixed(2)} (límites de acuerdo: ${loaLow.toFixed(2)} a ${loaHigh.toFixed(2)}). `+
+    `${Math.abs(bias)<sdDiff*0.3 ? 'El sesgo es pequeño en relación con la dispersión de las diferencias.' : 'El sesgo es apreciable — el instrumento podría sobre o subestimar sistemáticamente frente al gold standard.'} `+
+    `Recuerda: una r alta por sí sola NO basta para afirmar validez concurrente si hay un sesgo sistemático relevante.`;
+}
+
+// ---------- SEM / MDC ----------
+function calcSEM(){
+  const sd = parseFloat(document.getElementById('sem-sd').value);
+  const icc = parseFloat(document.getElementById('sem-icc').value);
+  if(isNaN(sd) || isNaN(icc) || icc<0 || icc>1){ alert('Ingresa una SD válida y un ICC entre 0 y 1.'); return; }
+  const sem = sd * Math.sqrt(1-icc);
+  const mdc90 = sem * 1.65 * Math.sqrt(2);
+  const mdc95 = sem * 1.96 * Math.sqrt(2);
+  document.getElementById('sem-result').classList.add('show');
+  document.getElementById('sem-value').textContent = sem.toFixed(2);
+  document.getElementById('mdc90-value').textContent = mdc90.toFixed(2);
+  document.getElementById('mdc95-value').textContent = mdc95.toFixed(2);
+}
+function useIccResult(){
+  if(lastICC===null){ alert('Primero calcula un ICC en la pestaña ICC.'); return; }
+  document.getElementById('sem-icc').value = lastICC.toFixed(3);
+}
+const SEM_PRESETS = {
+  prension:{sd:8.6, icc:0.92}, goniometro:{sd:9.1, icc:0.88},
+  berg:{sd:6.4, icc:0.95}, tug:{sd:3.2, icc:0.90}
+};
+function loadSemPreset(){
+  const key = document.getElementById('sem-preset').value;
+  if(!key) return;
+  const p = SEM_PRESETS[key];
+  document.getElementById('sem-sd').value = p.sd;
+  document.getElementById('sem-icc').value = p.icc;
+  calcSEM();
+}
+
+// ---------- Cambio real ----------
+function calcCambio(){
+  const a = parseFloat(document.getElementById('ch-a').value);
+  const b = parseFloat(document.getElementById('ch-b').value);
+  const mdc = parseFloat(document.getElementById('ch-mdc').value);
+  if(isNaN(a)||isNaN(b)||isNaN(mdc)){ alert('Completa los tres campos.'); return; }
+  const diff = b - a;
+  document.getElementById('ch-result').classList.add('show');
+  document.getElementById('ch-value').textContent = (diff>=0?'+':'') + diff.toFixed(2);
+  const real = Math.abs(diff) > mdc;
+  document.getElementById('ch-interp').innerHTML = real
+    ? `El cambio observado (${Math.abs(diff).toFixed(2)}) <b>supera</b> el MDC (${mdc}) → el cambio es <b>REAL</b>, no atribuible solo al error de medida.`
+    : `El cambio observado (${Math.abs(diff).toFixed(2)}) <b>no supera</b> el MDC (${mdc}) → el cambio podría deberse al error de medida, no se puede afirmar que sea real.`;
+}
+const CH_PRESETS = {
+  goniometria:{a:95, b:103, mdc:6}, dinamometria:{a:180, b:182, mdc:15}, tug:{a:12.4, b:10.1, mdc:3.5}
+};
+function loadChPreset(){
+  const key = document.getElementById('ch-preset').value;
+  if(!key) return;
+  const p = CH_PRESETS[key];
+  document.getElementById('ch-a').value = p.a;
+  document.getElementById('ch-b').value = p.b;
+  document.getElementById('ch-mdc').value = p.mdc;
+  calcCambio();
+}
+
+// ---------- Correlación r ----------
+const R_PRESETS = {
+  'fuerza-reaccion': "42,320\n38,350\n50,290\n35,365\n45,310\n30,390\n48,300\n33,375\n40,340\n52,285",
+  'fuerza-edad': "45,25\n40,35\n38,42\n30,58\n42,30\n25,68\n35,48\n28,62\n48,22\n33,52",
+  'berg-caidas': "54,0\n48,1\n56,0\n40,2\n52,0\n35,3\n50,1\n44,2\n56,0\n38,3"
+};
+function loadRPreset(){
+  const key = document.getElementById('r-preset').value;
+  if(!key) return;
+  document.getElementById('r-data').value = R_PRESETS[key];
+  calcR();
+}
+function calcR(){
+  const raw = document.getElementById('r-data').value.trim();
+  const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l.length);
+  const pts = [];
+  for(const line of lines){
+    const parts = line.split(/[,\s]+/).map(Number);
+    if(parts.length>=2 && !isNaN(parts[0]) && !isNaN(parts[1])) pts.push([parts[0],parts[1]]);
+  }
+  if(pts.length<3){ alert('Ingresa al menos 3 pares de valores X,Y.'); return; }
+  const n = pts.length;
+  const sx = pts.reduce((s,p)=>s+p[0],0), sy = pts.reduce((s,p)=>s+p[1],0);
+  const mx = sx/n, my = sy/n;
+  let num=0, dx2=0, dy2=0;
+  pts.forEach(([x,y])=>{ num += (x-mx)*(y-my); dx2 += (x-mx)**2; dy2 += (y-my)**2; });
+  const r = num / Math.sqrt(dx2*dy2);
+  document.getElementById('r-result').classList.add('show');
+  document.getElementById('r-value').textContent = r.toFixed(3);
+  const dir = r>0.05 ? 'positiva' : (r<-0.05 ? 'negativa' : 'prácticamente nula');
+  const abs = Math.abs(r);
+  let strength = abs<0.3 ? 'débil' : abs<0.5 ? 'baja-moderada' : abs<0.7 ? 'moderada-fuerte' : abs<0.9 ? 'fuerte' : 'muy fuerte';
+  document.getElementById('r-interp').innerHTML =
+    `Relación ${dir}, de fuerza ${strength} (n=${n}). Recuerda: una correlación alta <b>no implica causalidad</b>.`;
+}
+
+// ---------- Alfa de Cronbach ----------
+function buildAlfaTable(prefill){
+  const n = parseInt(document.getElementById('al-n').value)||5;
+  const k = parseInt(document.getElementById('al-k').value)||4;
+  const table = document.getElementById('alfa-table');
+  let html = '<tr><td></td>' + Array.from({length:k},(_,j)=>`<td style="font-family:var(--mono);font-size:11px;color:var(--teal-dark);text-align:center;">Ítem ${j+1}</td>`).join('') + '</tr>';
+  for(let i=0;i<n;i++){
+    html += `<tr><td style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);">Sujeto ${i+1}</td>`;
+    for(let j=0;j<k;j++){
+      const val = (prefill && prefill[i] && prefill[i][j]!==undefined) ? prefill[i][j] : '';
+      html += `<td><input type="number" step="any" class="alfa-cell" data-i="${i}" data-j="${j}" value="${val}"></td>`;
+    }
+    html += '</tr>';
+  }
+  table.innerHTML = html;
+}
+const ALFA_PRESETS = {
+  satisfaccion:{n:6, k:4, data:[[4,5,4,5],[3,3,4,3],[5,5,5,4],[2,2,3,2],[4,4,4,5],[3,4,3,3]]},
+  autoeficacia:{n:6, k:5, data:[[6,7,6,5,6],[4,4,3,4,4],[7,6,7,6,7],[3,2,3,2,3],[5,5,6,5,5],[6,5,6,6,6]]},
+  bajo:{n:6, k:4, data:[[5,1,3,4],[2,5,1,2],[4,2,5,1],[1,4,2,5],[3,3,4,3],[5,1,2,4]]}
+};
+function loadAlfaPreset(){
+  const key = document.getElementById('alfa-preset').value;
+  if(!key) return;
+  const p = ALFA_PRESETS[key];
+  document.getElementById('al-n').value = p.n;
+  document.getElementById('al-k').value = p.k;
+  buildAlfaTable(p.data);
+  calcAlfa();
+}
+buildAlfaTable();
+
+function variance(arr){
+  const m = arr.reduce((a,b)=>a+b,0)/arr.length;
+  return arr.reduce((s,v)=>s+(v-m)**2,0)/(arr.length-1);
+}
+function calcAlfa(){
+  const n = parseInt(document.getElementById('al-n').value);
+  const k = parseInt(document.getElementById('al-k').value);
+  const M = readMatrix('.alfa-cell', n, k);
+  for(const row of M){ if(row.some(v=>isNaN(v))){ alert('Completa todas las celdas de la tabla.'); return; } }
+
+  const itemVariances = [];
+  for(let j=0;j<k;j++){
+    const col = M.map(row=>row[j]);
+    itemVariances.push(variance(col));
+  }
+  const sumItemVar = itemVariances.reduce((a,b)=>a+b,0);
+  const totals = M.map(row=>row.reduce((a,b)=>a+b,0));
+  const totalVar = variance(totals);
+  const alpha = (k/(k-1)) * (1 - sumItemVar/totalVar);
+
+  document.getElementById('alfa-result').classList.add('show');
+  document.getElementById('alfa-value').textContent = alpha.toFixed(3);
+  let interp = alpha<0.5 ? 'inaceptable' : alpha<0.6 ? 'pobre' : alpha<0.7 ? 'cuestionable' : alpha<0.8 ? 'aceptable' : alpha<0.9 ? 'buena' : 'excelente (revisar redundancia de ítems)';
+  document.getElementById('alfa-interp').innerHTML = `Consistencia interna <b>${interp.toUpperCase()}</b>. Indica si los ${k} ítems miden coherentemente el mismo constructo.`;
+}
+
+// ---------- Techo / Suelo ----------
+const TS_PRESETS = {
+  'berg-ninos':{min:0, max:56, data:"56,54,56,48,56,30,56,52,56,44,56,56,38,56,50"},
+  'illinois-acv':{min:0, max:100, data:"0,0,5,0,0,8,0,0,12,0,0,3,0,20,0"},
+  'sin-efecto':{min:0, max:56, data:"38,42,35,48,30,44,40,36,46,33,41,39,45,32,43"}
+};
+function loadTsPreset(){
+  const key = document.getElementById('ts-preset').value;
+  if(!key) return;
+  const p = TS_PRESETS[key];
+  document.getElementById('ts-min').value = p.min;
+  document.getElementById('ts-max').value = p.max;
+  document.getElementById('ts-data').value = p.data;
+  calcTechoSuelo();
+}
+function calcTechoSuelo(){
+  const min = parseFloat(document.getElementById('ts-min').value);
+  const max = parseFloat(document.getElementById('ts-max').value);
+  const thresh = parseFloat(document.getElementById('ts-thresh').value)||15;
+  const raw = document.getElementById('ts-data').value.trim();
+  const scores = raw.split(/[,\s]+/).map(Number).filter(v=>!isNaN(v));
+  if(isNaN(min)||isNaN(max)||scores.length===0){ alert('Completa el rango y la lista de puntuaciones.'); return; }
+  const nSuelo = scores.filter(s=>s===min).length;
+  const nTecho = scores.filter(s=>s===max).length;
+  const pctSuelo = 100*nSuelo/scores.length;
+  const pctTecho = 100*nTecho/scores.length;
+  document.getElementById('ts-result').classList.add('show');
+  document.getElementById('ts-suelo').textContent = pctSuelo.toFixed(1)+'%';
+  document.getElementById('ts-techo').textContent = pctTecho.toFixed(1)+'%';
+  let msgs = [];
+  if(pctSuelo>=thresh) msgs.push(`<b>Efecto SUELO relevante</b> (≥${thresh}% en la puntuación mínima): el instrumento podría ser demasiado difícil para esta muestra.`);
+  if(pctTecho>=thresh) msgs.push(`<b>Efecto TECHO relevante</b> (≥${thresh}% en la puntuación máxima): el instrumento podría ser demasiado fácil para esta muestra.`);
+  if(msgs.length===0) msgs.push('No se detecta efecto techo ni suelo relevante según el umbral definido.');
+  document.getElementById('ts-interp').innerHTML = msgs.join('<br>') + `<br><span style="color:#8FB3AA">n = ${scores.length} puntuaciones analizadas.</span>`;
+}
+
+// ---------- Tipo de validez ----------
+function calcValidez(){
+  const who = document.getElementById('v-who').value;
+  const whenWrap = document.getElementById('v-when-wrap');
+  const out = document.getElementById('v-value');
+  if(who==='externo'){
+    whenWrap.style.display='block';
+    const when = document.getElementById('v-when').value;
+    if(when==='mismo') out.textContent = 'Validez CONCURRENTE';
+    else if(when==='futuro') out.textContent = 'Validez PREDICTIVA';
+    else out.textContent = 'Selecciona cuándo se mide el criterio externo…';
+    return;
+  }
+  whenWrap.style.display='none';
+  if(who==='pacientes') out.textContent = 'Validez APARENTE (de facie)';
+  else if(who==='expertos') out.textContent = 'Validez de CONTENIDO';
+  else if(who==='teoria') out.textContent = 'Validez de CONSTRUCTO';
+  else out.textContent = 'Completa las preguntas';
+}
+
+// ---------- Sensibilidad / Especificidad ----------
+const SE_PRESETS = {
+  romberg:{vp:32, fp:14, fn:9, vn:45},
+  sarcopenia:{vp:38, fp:11, fn:7, vn:64},
+  'tug-caidas':{vp:22, fp:9, fn:6, vn:43}
+};
+function loadSePreset(){
+  const key = document.getElementById('se-preset').value;
+  if(!key) return;
+  const p = SE_PRESETS[key];
+  document.getElementById('se-vp').value = p.vp;
+  document.getElementById('se-fp').value = p.fp;
+  document.getElementById('se-fn').value = p.fn;
+  document.getElementById('se-vn').value = p.vn;
+  calcSensEsp();
+}
+function calcSensEsp(){
+  const vp = parseFloat(document.getElementById('se-vp').value);
+  const fp = parseFloat(document.getElementById('se-fp').value);
+  const fn = parseFloat(document.getElementById('se-fn').value);
+  const vn = parseFloat(document.getElementById('se-vn').value);
+  if([vp,fp,fn,vn].some(v=>isNaN(v)||v<0)){ alert('Completa las cuatro celdas de la tabla 2×2 con números ≥ 0.'); return; }
+  const sens = vp/(vp+fn);
+  const esp = vn/(vn+fp);
+  const vpp = vp/(vp+fp);
+  const vpn = vn/(vn+fn);
+  const acc = (vp+vn)/(vp+fp+fn+vn);
+  const lrpos = esp<1 ? sens/(1-esp) : Infinity;
+  const lrneg = esp>0 ? (1-sens)/esp : Infinity;
+
+  document.getElementById('se-result').classList.add('show');
+  document.getElementById('se-sens').textContent = (sens*100).toFixed(1)+'%';
+  document.getElementById('se-esp').textContent = (esp*100).toFixed(1)+'%';
+  document.getElementById('se-acc').textContent = (acc*100).toFixed(1)+'%';
+  document.getElementById('se-vpp').textContent = (vpp*100).toFixed(1)+'%';
+  document.getElementById('se-vpn').textContent = (vpn*100).toFixed(1)+'%';
+  document.getElementById('se-lr').textContent = (isFinite(lrpos)?lrpos.toFixed(2):'∞') + ' / ' + (isFinite(lrneg)?lrneg.toFixed(2):'∞');
+
+  let notes = [];
+  if(sens>=0.90) notes.push('Sensibilidad alta → útil para DESCARTAR (SnNout) cuando el resultado es negativo.');
+  if(esp>=0.90) notes.push('Especificidad alta → útil para CONFIRMAR (SpPin) cuando el resultado es positivo.');
+  if(notes.length===0) notes.push('Ni la sensibilidad ni la especificidad son lo suficientemente altas (≥90%) para usar la prueba de forma aislada para confirmar o descartar.');
+  document.getElementById('se-interp').innerHTML = notes.join('<br>');
+}
+
+// ---------- ROC / AUC ----------
+const ROC_PRESETS = {
+  'prension-sarcopenia': {dir:'low', data:
+    "14,1\n16,1\n18,1\n19,1\n21,0\n22,1\n24,0\n25,1\n26,0\n28,0\n29,1\n30,0\n31,0\n33,0\n34,0\n35,0\n20,1\n27,0\n17,1\n32,0"},
+  'tug-caidas': {dir:'high', data:
+    "9,0\n10,0\n11,0\n12,1\n13,0\n14,1\n15,1\n16,1\n17,0\n18,1\n10.5,0\n13.5,1\n19,1\n11.5,0\n20,1\n9.5,0\n14.5,0\n16.5,1\n12.5,0\n21,1"}
+};
+function loadRocPreset(){
+  const key = document.getElementById('roc-preset').value;
+  if(!key) return;
+  const p = ROC_PRESETS[key];
+  document.getElementById('roc-data').value = p.data;
+  document.getElementById('roc-dir').value = p.dir;
+  calcROC();
+}
+function calcROC(){
+  const raw = document.getElementById('roc-data').value.trim();
+  const lines = raw.split('\n').map(l=>l.trim()).filter(l=>l.length);
+  const pts = [];
+  for(const line of lines){
+    const parts = line.split(/[,\s]+/).map(Number);
+    if(parts.length>=2 && !isNaN(parts[0]) && (parts[1]===0||parts[1]===1)) pts.push({score:parts[0], cond:parts[1]});
+  }
+  const nPos = pts.filter(p=>p.cond===1).length;
+  const nNeg = pts.filter(p=>p.cond===0).length;
+  if(pts.length<4 || nPos===0 || nNeg===0){ alert('Ingresa al menos 4 pares "valor,condición" con al menos un 0 y un 1.'); return; }
+
+  const dir = document.getElementById('roc-dir').value; // 'low' = valores bajos = positivo
+  const scores = [...new Set(pts.map(p=>p.score))].sort((a,b)=>a-b);
+  const thresholds = [-Infinity, ...scores, Infinity];
+
+  const rocPoints = thresholds.map(t=>{
+    let tp=0, fp=0;
+    pts.forEach(p=>{
+      const predPos = dir==='low' ? p.score <= t : p.score >= t;
+      if(predPos && p.cond===1) tp++;
+      if(predPos && p.cond===0) fp++;
+    });
+    return {t, tpr: tp/nPos, fpr: fp/nNeg};
+  });
+  rocPoints.sort((a,b)=> a.fpr-b.fpr || a.tpr-b.tpr);
+
+  let auc=0;
+  for(let i=1;i<rocPoints.length;i++){
+    const w = rocPoints[i].fpr - rocPoints[i-1].fpr;
+    const h = (rocPoints[i].tpr + rocPoints[i-1].tpr)/2;
+    auc += w*h;
+  }
+
+  let best = rocPoints[0], bestJ=-Infinity;
+  rocPoints.forEach(p=>{ const J = p.tpr - p.fpr; if(J>bestJ && isFinite(p.t)){ bestJ=J; best=p; } });
+
+  document.getElementById('roc-result').classList.add('show');
+  document.getElementById('roc-auc').textContent = auc.toFixed(3);
+  document.getElementById('roc-cut').textContent = isFinite(best.t) ? best.t.toFixed(2) : '—';
+
+  // draw SVG
+  const svg = document.getElementById('roc-svg');
+  const pad=30, size=280;
+  let svgParts = [];
+  svgParts.push(`<line x1="${pad}" y1="${pad}" x2="${pad}" y2="${pad+size}" stroke="#5D9E8D" stroke-width="1"/>`);
+  svgParts.push(`<line x1="${pad}" y1="${pad+size}" x2="${pad+size}" y2="${pad+size}" stroke="#5D9E8D" stroke-width="1"/>`);
+  svgParts.push(`<line x1="${pad}" y1="${pad+size}" x2="${pad+size}" y2="${pad}" stroke="#3C5254" stroke-width="1" stroke-dasharray="4,4"/>`);
+  const path = rocPoints.map(p=> `${pad + p.fpr*size},${pad+size - p.tpr*size}`).join(' ');
+  svgParts.push(`<polyline points="${path}" fill="none" stroke="#C08829" stroke-width="2.5"/>`);
+  const bx = pad+best.fpr*size, by = pad+size-best.tpr*size;
+  svgParts.push(`<circle cx="${bx}" cy="${by}" r="4.5" fill="#F7F9F6" stroke="#C08829" stroke-width="2"/>`);
+  svgParts.push(`<text x="${pad}" y="${pad+size+16}" fill="#8FB3AA" font-size="10" font-family="monospace">0</text>`);
+  svgParts.push(`<text x="${pad+size-10}" y="${pad+size+16}" fill="#8FB3AA" font-size="10" font-family="monospace">1−Esp</text>`);
+  svgParts.push(`<text x="${pad-24}" y="${pad+size}" fill="#8FB3AA" font-size="10" font-family="monospace">0</text>`);
+  svgParts.push(`<text x="${pad-24}" y="${pad+8}" fill="#8FB3AA" font-size="10" font-family="monospace">Sens</text>`);
+  svg.innerHTML = svgParts.join('');
+
+  let qual = auc<0.6?'sin capacidad discriminativa útil':auc<0.7?'pobre':auc<0.8?'aceptable':auc<0.9?'excelente':'sobresaliente';
+  document.getElementById('roc-interp').innerHTML =
+    `AUC = ${auc.toFixed(3)} → discriminación <b>${qual.toUpperCase()}</b>. `+
+    `Punto de corte óptimo (índice de Youden, J=${bestJ.toFixed(3)}): <b>${isFinite(best.t)?best.t.toFixed(2):'—'}</b> `+
+    `(Sensibilidad=${(best.tpr*100).toFixed(1)}%, Especificidad=${((1-best.fpr)*100).toFixed(1)}%).`;
+}
+
+// ---------- Práctica ----------
+const questions = [
+  {q:"Una investigadora muestra su escala de 'miedo a caer' a 15 adultos mayores, quienes dicen que las preguntas 'tienen mucho sentido' y 'hablan de lo que les preocupa'. ¿Qué validez refleja?",
+   opts:["Validez de contenido","Validez de constructo","Validez aparente (de facie)","Validez predictiva"], correct:2,
+   fb:"Los adultos mayores (no expertos) opinan subjetivamente que el instrumento 'parece medir' lo que debe medir → validez APARENTE."},
+  {q:"Un fisioterapeuta deportivo evalúa el tiempo de reacción con una app móvil y, simultáneamente, con un sistema de laboratorio certificado. ¿Qué se evalúa?",
+   opts:["Confiabilidad test-retest","Validez concurrente","Sensibilidad al cambio","Validez predictiva"], correct:1,
+   fb:"Comparación con un gold standard en el mismo momento → validez CONCURRENTE."},
+  {q:"El 85% de niños con desarrollo típico obtiene la puntuación máxima en la Pediatric Balance Scale. ¿Cuál es el problema?",
+   opts:["Efecto suelo","Baja confiabilidad inter-evaluador","Efecto techo","Baja validez de contenido"], correct:2,
+   fb:"La mayoría alcanza la puntuación MÁXIMA → el instrumento es demasiado fácil para esta población → EFECTO TECHO."},
+  {q:"Fuerza de cuádriceps: lunes 180 Nm, jueves 182 Nm (sin intervención). MDC del equipo = 15 Nm. ¿Qué se concluye?",
+   opts:["La mejora de 2 Nm es clínicamente significativa","El cambio de 2 Nm probablemente se debe al error de medida","El dinamómetro no es válido","Se debe repetir con otro evaluador"], correct:1,
+   fb:"2 Nm < MDC (15 Nm) → el cambio no supera el umbral del error de medida, podría deberse al azar."},
+  {q:"Dos kinesiólogos evalúan de forma independiente la Escala de Ashworth Modificada en 30 pacientes. CCI = 0.88. ¿Cómo se interpreta?",
+   opts:["Confiabilidad inter-evaluador BUENA","Confiabilidad inter-evaluador EXCELENTE","La escala no es válida","La mayoría tiene espasticidad severa"], correct:0,
+   fb:"CCI entre 0.75 y 0.90 → confiabilidad BUENA (no excelente, que requeriría >0.90)."},
+  {q:"BERG correlaciona r=+0.75 con el número de caídas en los siguientes 6 meses. ¿Qué se evalúa?",
+   opts:["Validez concurrente","Validez predictiva: a mayor BERG, tiende a haber menos caídas futuras","Confiabilidad test-retest","Validez de contenido"], correct:1,
+   fb:"BERG predice un resultado FUTURO (caídas en 6 meses) → validez PREDICTIVA."},
+  {q:"Para validar un cuestionario de bienestar psicológico, se plantea que debe correlacionar positivamente con satisfacción laboral y negativamente con burnout. ¿Qué se evalúa?",
+   opts:["Validez aparente","Validez de constructo","Confiabilidad inter-evaluador","Validez predictiva"], correct:1,
+   fb:"Hipótesis teóricas sobre correlaciones esperadas con otras medidas → validez de CONSTRUCTO."},
+  {q:"Se aplica un cuestionario de calidad de vida dos veces en la misma tarde (30 min de diferencia), mismo evaluador. CCI = 0.96. ¿Qué se evaluó?",
+   opts:["Confiabilidad inter-evaluador, excelente","Confiabilidad test-retest, excelente","Consistencia interna, pobre","Sensibilidad al cambio, alta"], correct:1,
+   fb:"Mismo evaluador, dos momentos distintos, sin intervención → confiabilidad TEST-RETEST; CCI>0.90 → EXCELENTE."}
+];
+const list = document.getElementById('practice-list');
+questions.forEach((item, qi)=>{
+  const card = document.createElement('div');
+  card.className='qcard';
+  card.innerHTML = `<p class="q">${qi+1}. ${item.q}</p>
+    <div class="opts">${item.opts.map((o,oi)=>`<button data-oi="${oi}">${String.fromCharCode(65+oi)}. ${o}</button>`).join('')}</div>
+    <div class="fb"></div>`;
+  const fb = card.querySelector('.fb');
+  card.querySelectorAll('.opts button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const oi = parseInt(btn.dataset.oi);
+      card.querySelectorAll('.opts button').forEach(b=>b.disabled=true);
+      if(oi===item.correct){ btn.classList.add('correct'); }
+      else{ btn.classList.add('wrong'); card.querySelectorAll('.opts button')[item.correct].classList.add('correct'); }
+      fb.textContent = item.fb;
+      fb.classList.add('show');
+    });
+  });
+  list.appendChild(card);
+});
+</script>
+</body>
+</html>
