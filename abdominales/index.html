@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test de abdominales en 1 minuto</title>
+<style>
+:root{--red:#e30613;--navy:#17365d;--bg:#f5f7fa;--card:#fff;--muted:#657184}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#17202a}
+header{background:var(--red);color:#fff;padding:20px;text-align:center}
+header h1{margin:0;font-size:clamp(23px,5vw,38px)} header p{margin:6px 0 0}
+main{max-width:720px;margin:24px auto;padding:0 16px}
+.card{background:var(--card);border-radius:20px;padding:22px;box-shadow:0 8px 28px #00000014}
+label{font-weight:700;display:block;margin:14px 0 7px}
+input,select{width:100%;padding:14px;border:1px solid #cfd6df;border-radius:12px;font-size:18px;background:#fff}
+button{width:100%;margin-top:20px;padding:15px;border:0;border-radius:12px;background:var(--navy);color:#fff;font-size:18px;font-weight:800;cursor:pointer}
+#result{display:none;margin-top:20px;border-radius:16px;padding:20px;text-align:center}
+#cat{font-size:34px;font-weight:900;margin:4px 0}.small{color:var(--muted);font-size:14px;line-height:1.45}
+.legend{margin-top:18px;padding:16px;background:#f8fafc;border-radius:14px}.legend strong{color:var(--navy)}
+.warn{color:#8a5a00;background:#fff4cf;padding:10px;border-radius:10px;margin-top:12px;display:none}
+footer{max-width:720px;margin:14px auto 30px;padding:0 16px;color:#697586;font-size:12px;line-height:1.45}
+</style>
+</head>
+<body>
+<header>
+<h1>Test de abdominales · 1 minuto</h1>
+<p>Resistencia muscular del tronco · 18–29 años</p>
+</header>
+<main>
+<div class="card">
+<label for="age">Edad</label>
+<input id="age" type="number" min="18" max="29" placeholder="Ej.: 22">
+<label for="sex">Sexo</label>
+<select id="sex"><option value="">Selecciona</option><option value="M">Masculino</option><option value="F">Femenino</option></select>
+<label for="reps">Abdominales válidos en 60 segundos</label>
+<input id="reps" type="number" min="0" step="1" placeholder="Ej.: 42">
+<button onclick="calc()">Calcular mi categoría</button>
+<div id="warning" class="warn"></div>
+<div id="result">
+<div class="small">TU RESULTADO</div>
+<div id="cat"></div>
+<div id="detail"></div>
+</div>
+<div class="legend">
+<strong>Clasificación utilizada</strong><br>
+<span class="small">Masculino: ≤27 Muy bajo · 28–34 Bajo · 35–46 Promedio · 47–54 Alto · ≥55 Excelente.<br>
+Femenino: ≤17 Muy bajo · 18–27 Bajo · 28–42 Promedio · 43–50 Alto · ≥51 Excelente.</span>
+</div>
+</div>
+</main>
+<footer>
+Referencia operativa basada en normas percentilares del test de sit-ups de 1 minuto para adultos jóvenes. Las categorías representan desempeño, no diagnóstico ni riesgo de enfermedad. Para 18–19 años se usa provisionalmente la banda 20–29 años y debe declararse metodológicamente.
+</footer>
+<script>
+function classify(sex,r){
+ if(sex==="M"){if(r<28)return["Muy bajo","≤27"];if(r<35)return["Bajo","28–34"];if(r<47)return["Promedio","35–46"];if(r<55)return["Alto","47–54"];return["Excelente","≥55"]}
+ else{if(r<18)return["Muy bajo","≤17"];if(r<28)return["Bajo","18–27"];if(r<43)return["Promedio","28–42"];if(r<51)return["Alto","43–50"];return["Excelente","≥51"]}
+}
+function calc(){
+ const a=+document.getElementById("age").value,s=document.getElementById("sex").value,r=+document.getElementById("reps").value;
+ const w=document.getElementById("warning"),box=document.getElementById("result");
+ w.style.display="none"; box.style.display="none";
+ if(!a||a<18||a>29||!s||document.getElementById("reps").value===""||r<0){
+  w.textContent="Completa edad (18–29), sexo y número de repeticiones.";w.style.display="block";return;
+ }
+ const [c,range]=classify(s,r);
+ document.getElementById("cat").textContent=c;
+ document.getElementById("detail").innerHTML=`<b>${r} repeticiones/min</b><br>Rango de tu categoría: ${range} repeticiones${a<20?'<br><span class="small">Nota: para 18–19 años se aplica provisionalmente la referencia 20–29.</span>':''}`;
+ const colors={"Muy bajo":"#f4cccc","Bajo":"#fce5cd","Promedio":"#fff2cc","Alto":"#d9ead3","Excelente":"#b6d7a8"};
+ box.style.background=colors[c];box.style.display="block";
+}
+</script>
+</body></html>
